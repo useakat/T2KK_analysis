@@ -1,0 +1,13 @@
+*.dat
+par_*
+nohup.out
+rslt_*
+*.eps
+rslt_*
+rslt_out
+archive
+CPdata_*
+date.txt
+date_server.txt
+plots
+CP_true_t2kk_1000_3.0_0.5_1_5_5_270_0.45

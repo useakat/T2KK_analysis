@@ -1,0 +1,248 @@
+C*************************************************
+C System parameters
+C
+C mode = 0:no minimization 1:minuit minimization
+C iNnm = 0:nu_mu + anti-nu_mu from the nu_mu focusing beam are not detected 1:detected
+C iNne = 0:nu_e + anti-nu_e from the nu_mu focusing beam are not detected 1:detected
+C iNam = 0:nu_mu + anti-nu_mu from the anti-nu_mu focusing beam are not detected 1:detected
+C iNae = 0:nu_e + anti-nu_e from the anti-nu_mu focusing beam are not detected 1:detected
+C ndiv: The division number for a parameter scanning
+C ihisto = 0:no histo 1:histo(with simpson)  2:histo(center-value*0.05MeV)
+C ismear = 0:no smearing 1:smearing
+C ipi0dist = 0:NC pi0bg-Erec dist 1:NC pi0-mom dist
+C ipi0xsec = 0:NCpi0 1:NCpi0bg(polfit) 2:NCpi0bg(old)
+C ihfunc = 0:normal mode(under construction) 
+C          1:flux 2:Osc.Prob. 3:Xsec 4:flux*Osc.prob.*Xsec
+C          5:semarring function for CCQE 11:normal mode(NCtotal) 100:Free
+C*************************************************
+  mode  1
+  iSK   1
+   Srho  2.60d0
+   SV    22.5d0 ! fiducial volume
+   SL    295d0
+   SOAB   3
+   Semin    0.4d0
+   Semax    1.2d0 
+   Smmin    0.4d0 
+   Smmax    5.0d0 
+   Sbfactor 4  ! should be 4 for mode = 1    
+  iOki  0
+   Orho  2.75d0
+   OV    100d0
+   OL    653d0
+   OOAB  1.4d0
+   Oemin    0.4d0
+   Oemax    2.4d0 
+   Ommin    0.4d0 
+   Ommax    5.0d0 
+   Obfactor 4  ! should be 4 for mode = 1    
+  iKr   1
+   Krho  3.0d0
+   KV     100d0
+   KL     1000
+   KOAB   0.5
+   Kemin    0.4d0
+   Kemax    2.8d0 
+   Kmmin    0.4d0 
+   Kmmax    5.0d0 
+   Kbfactor 4  ! should be 4 for mode = 1    
+  iNne  1      
+  iNnm  1     
+  iNae  0
+  iNam  0      
+  serror  1d-2
+  snmax   10 
+  ihisto   2   ! Do not use 1. The integration may not converge.
+  ismear   1   ! 0:no smearing 1:smearing
+  iCCQE    1   ! CCQE switch
+  iCCRes   1   ! CCRes switch. Meaningfull when ismear=1.
+  iNC      1   ! NC switch. Meaningfull when ismear=1.
+  ipi0dist 0   ! Set to 0 unless you want to study NC pi^0 itself.
+  ipi0xsec 2   ! 0:NC1pi0 1:NC1pi0BG (polfit) 2:NC1pi0BG (old missID)
+  ihfunc   0
+  ieff     1   ! switch for detection efficiency of a Cerenkov ring.  Meaningful when ismear=1
+  imissid  1   ! switch for miss-ID probability.  Meaningful when ismear=1
+  ipi0unc  2   ! 0:res.1pi0 norm + coh.1pi0 norm 1:NC1pi0 norm + ratio btw res.1pi0 & coh.1pi0 2:Only NC1pi0 unc
+  ihypo   -1   ! 1:fit with true MH -1:fit with wrong MH
+  iminevents 1 ! required minumum event number in each bin
+  basic_binsize 0.05 ! Do not change from 0.05
+C*************************************************
+C Experimental parameters
+C 
+C beam: focusing beam type: 1:nu_mu -1:anti-nu_mu 
+C OAB: Off-Axis-Angle @Far-detector: 0/0.5/0.6/0.9/1.0/1.4/1.5/2.0/2.5/3.0 [degree]
+C      In minimization mode (mode=1), OAB is the Off-axis beam angle @ SK: 2/2.5/3
+C nu_mode: neutrino type traveling to a far detector from the beam source
+C          1:nu_e 2:nu_mu -1:anti-nu_e -2:anti-nu_mu 
+C detect: the neutrino type to be detected at a far detector
+C Y: Total experimental exposure in years
+C r_nu, r_anu: running ratio of nu_mu and anti-nu_mu focusing beam
+C              Y(nu_mu) : Y(anu_mu) = r_nu : r_anu  
+C Emin (Emax): The minimum (maximum) energy for an analysis [GeV]
+C binsize: binsize in the unit of a binning parameter 
+C*************************************************
+  beam    1         ! For mode = 1
+  Y       5d0  
+  r_nu    1
+  r_anu   0
+  Emin    0d0       ! Do not change
+  Emax    5.9d0     ! Do not change    ! Emax shoud be < 6.0
+  binsize_factor 1  ! Do not change
+C*************************************************
+C Neutrino oscillation parameters
+c ioct ! 1:sin(th_atm)^2 > 0.5 -1:sin(th_atm)^2 <= 0.5
+c      ! Valid only for ithatm=1
+C*************************************************
+  iinput   1  ! 1:ssol 2:s12
+  ithatm   2  ! 1:thatm = s2atm2  2:thatm = satm2
+  ioct     -1 ! Only valid for ithatm = 1
+  idmatm2  1  ! 1:dm2atm = dm^2_31 2:dm2atm = dm^2_32 	
+  MH  1
+  s2sol_2  0.83d0   ! re
+  thatm    0.5          ! PDG (2013) 
+  s2rct_2  0.1d0    ! re
+  dm21_2   8.20d-5   ! re
+  dmatm_2  2.5d-3    ! re
+  dCP      0
+C*************************************************
+C Fitting parameters
+C*************************************************
+  fs2sol_2      0.83
+  err_s2sol_2   0.07
+  ifit_s2sol_2  1       ! 0: fixed param  1: fitting param
+  ichi2_s2sol_2 1       ! 0: NOT included in chi^2 1: Included in chi^2
+
+  fthatm        0.5   
+  err_thatm     0.5
+  ifit_thatm    1       
+  ichi2_thatm   0       
+
+  fs2rct_2      0.1   	
+  err_s2rct_2   0.01
+  ifit_s2rct_2  1       
+  ichi2_s2rct_2 1       
+
+  fdm21_2       8.20d-5 
+  err_dm21_2    0.60d-5
+  ifit_dm21_2   1       
+  ichi2_dm21_2  1       
+
+  fdmatm_2      2.5d-3
+  err_dmatm_2   0.1d-3 
+  ifit_dmatm_2  1       
+  ichi2_dmatm_2 0       
+
+  fdCP          0      
+  err_dCP       10     
+  ifit_dCP      1       
+  ichi2_dCP     0       
+C*************************************************
+C Systematic Errors (correlated)
+C*************************************************
+  fCCQEn      1
+  err_fCCQEn  0.03
+  fCCQEa      1
+  err_fCCQEa  0.03
+  fCCResn     1
+  err_fCCResn 0.2   
+  fCCResa     1
+  err_fCCResa 0.2
+  fpi0        1
+  err_fpi0    0.5  ! POLFIT uncertainty
+  fpirs       1
+  err_fpirs   0.10  ! uncertainty of axial mass for resonant NC pi0
+  fpico       1
+  err_fpico   0.15  ! uncertainty of axial mass for coherent NC pi0
+  frpi0       1
+  err_frpi0   0.18  
+C*************************************************
+C Systematic Errors (uncorrelated)
+C*************************************************
+CCCCC  SK  CCCCCCCCC
+  fS         1     ! Fiducial volume
+  err_fS     0.03
+  fSrho      1
+  err_fSrho  0.06
+  fSnmn      1
+  err_fSnmn  0.03
+  fSnen      1
+  err_fSnen  0.03
+  fSnma      1.00
+  err_fSnma  0.03
+  fSnea      1.00
+  err_fSnea  0.03
+  fSamn      1.00
+  err_fSamn  0.03
+  fSaen      1.00
+  err_fSaen  0.03
+  fSama      1.00
+  err_fSama  0.03
+  fSaea      1.00
+  err_fSaea  0.03
+  Seffe      0.90   ! Efficiency of detecting the Cerenkov ring emitted by an electron
+  err_Seffe  0.05
+  Seffmu     1.00   ! Efficiency of detecting the Cerenkov ring emitted by a muon
+  err_Seffmu 0.01
+  SPe2m      0.00   ! Probability of miss-ID a detected electron Cerenkov ring as a muon ring 
+  err_SPe2m  0.01
+  SPm2e      0.01   ! Probability of miss-ID a detected muon Cerenkov ring as an electron ring
+  err_SPm2e  0.01
+CCCCC  Oki  CCCCCCCCC
+  fO         1.00
+  err_fO     0.03
+  fOrho      1.00
+  err_fOrho  0.06
+  fOnmn      1.00
+  err_fOnmn  0.03
+  fOnen      1.00
+  err_fOnen  0.03
+  fOnma      1.00
+  err_fOnma  0.03
+  fOnea      1.00
+  err_fOnea  0.03
+  fOamn      1.00
+  err_fOamn  0.03
+  fOaen      1.00
+  err_fOaen  0.03
+  fOama      1.00
+  err_fOama  0.03
+  fOaea      1.00
+  err_fOaea  0.03
+  Oeffe      0.90    ! Efficiency of detecting the Cerenkov ring emitted by an electron
+  err_Oeffe  0.05
+  Oeffmu     1.00    ! Efficiency of detecting the Cerenkov ring emitted by a muon
+  err_Oeffmu 0.01
+  OPe2m      0.00   ! Probability of miss-ID a detected electron Cerenkov ring as a muon ring 
+  err_OPe2m  0.01
+  OPm2e      0.01   ! Probability of miss-ID a detected muon Cerenkov ring as an electron ring
+  err_OPm2e  0.01
+CCCCC  Korea  CCCCCCCCC
+  fK        1.00
+  err_fK    0.03
+  fKrho     1.00
+  err_fKrho 0.06
+  fKnmn     1.00
+  err_fKnmn 0.03
+  fKnen     1.00
+  err_fKnen 0.03
+  fKnma     1.00
+  err_fKnma 0.03
+  fKnea     1.00
+  err_fKnea 0.03
+  fKamn     1.00
+  err_fKamn 0.03
+  fKaen     1.00
+  err_fKaen 0.03
+  fKama     1.00
+  err_fKama 0.03
+  fKaea     1.00
+  err_fKaea 0.03
+  Keffe     0.90   ! Efficiency of detecting the Cerenkov ring emitted by an electron
+  err_Keffe 0.05
+  Keffmu    1.00   ! Efficiency of detecting the Cerenkov ring emitted by a muon
+  err_Keffmu 0.01
+  KPe2m     0.00   ! Probability of miss-ID a detected electron Cerenkov ring as a muon ring 
+  err_KPe2m 0.01
+  KPm2e     0.01   ! Probability of miss-ID a detected muon Cerenkov ring as an electron ring
+  err_KPm2e 0.01
+CEND_OF_DATA
