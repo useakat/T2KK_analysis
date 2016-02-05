@@ -1,7 +1,7 @@
-#!/Applications/Mathematica.app/Contents/MacOS/MathematicaScript -script
-(* << functions` *)
-(* dir1 = SetDirectory[NotebookDirectory[]]; *)
-dir1 = "."
+#!/usr/local/bin/MathematicaScript -script
+(* KEKCC ^ *)
+(* #!/Applications/Mathematica.app/Contents/MacOS/MathematicaScript -script *) 
+(* Mac Book Pro ^ *) 
 
 exp = "t2kk";
 L = "1000";
@@ -12,7 +12,7 @@ th23 = "0.5";
 rnu = "3";
 ranu = "7";
 
-dir = dir1 <> "/rslt_" <> exp <> "_" <> OAB1 <> "_CP_nh_50MeV_40pt_test";
+dir = "./rslt_" <> exp <> "_" <> OAB1 <> "_CP_nh_50MeV_40pt_test";
 
 file = dir <> "/CP_true_" <> exp <> "_" <> L <> "_" <> OAB1 <> 
 "_" <>  OAB2 <> "_" <> MH <> "_" <> rnu <> "_" <> ranu <> "_" <> th23 <> 
