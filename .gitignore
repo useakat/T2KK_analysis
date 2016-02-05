@@ -1,10 +1,8 @@
 *.dat
 par_*
 nohup.out
-rslt_*
 *.eps
 rslt_*
-rslt_out
 archive
 CPdata_*
 date.txt

@@ -28,7 +28,7 @@ C*************************************************
    Sbfactor 1  ! should be 4 for mode = 1    
   iOki  0
    Orho  2.75d0
-   OV  560
+   OV  
    OL    653d0
    OOAB  1.4d0
    Oemin    0.4d0
@@ -56,7 +56,7 @@ C*************************************************
   ismear   1   ! 0:no smearing 1:smearing
   iCCQE    1   ! CCQE switch
   iCCRes   1   ! CCRes switch. Meaningfull when ismear=1.
-  iNC      0   ! NC switch. Meaningfull when ismear=1.
+  iNC      1   ! NC switch. Meaningfull when ismear=1.
   ipi0dist 0   ! Set to 0 unless you want to study NC pi^0 itself.
   ipi0xsec 1   ! 0:NC1pi0 1:NC1pi0BG (polfit) 2:NC1pi0BG (old missID)
   ihfunc   0
@@ -82,7 +82,7 @@ C Emin (Emax): The minimum (maximum) energy for an analysis [GeV]
 C binsize: binsize in the unit of a binning parameter 
 C*************************************************
   beam    1         ! For mode = 1
-  Y  13.3
+  Y  5
   r_nu    1
   r_anu   0
   Emin    0d0       ! Do not change

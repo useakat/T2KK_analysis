@@ -62,7 +62,8 @@ if [ $iMH == 1 ]; then
     OAB_SK=3.0
     OAB_far=0.5
 
-    run_name=t2kk_3.0_MH_th23_50MeV_20pt
+#    run_name=t2kk_test
+    run_name=t2kk_3.0_MH_50MeV_20pt
 #    run_name=t2kk_2.5_MH_50MeV_20pt
 #    run_name=test
     makedir.sh rslt_$run_name 0
@@ -71,12 +72,12 @@ if [ $iMH == 1 ]; then
     params_card=params.card_new_50MeV
     cp -rf temp/$params_card temp/params.card 
 
-    th23=0.6
+    th23=0.5
     sed -e "s/ thatm .*/ thatm $th23/" \
    	-e "s/ fthatm .*/ fthatm $th23/" temp/params.card > params_card.tmp
     mv params_card.tmp temp/params.card
     ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far 1 0 0
-    ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far -1 0 1
+#    ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far -1 0 1
 
 fi
 
@@ -86,23 +87,24 @@ if [ $ichi2_CP == 1 ]; then
     CPmode=CP
     fitMH=true
 
-    # exp=2
-    # L=1000
-    # OAB_SK=2.5
-    # OAB_far=1.0
-    # rho_SK=2.6
-    # rho_far=2.9
-
-    exp=3
-    L=295
-    OAB_SK=2.5
-    OAB_far=2.5
+    exp=2
+    L=1000
+    OAB_SK=3.0
+    OAB_far=0.5
     rho_SK=2.6
-    rho_far=2.6
+    rho_far=2.9
+
+    # exp=3
+    # L=295
+    # OAB_SK=2.5
+    # OAB_far=2.5
+    # rho_SK=2.6
+    # rho_far=2.6
 
 #    run_name=t2kk_2.5_chi2-CP_nh_50MeV_40pt
 #    run_name=t2hk_2.5_chi2-CP_nh_50MeV_40pt
-    run_name=test
+    run_name=t2kk_3.0_chi2-CP_nh_50MeV_40pt
+#    run_name=test
     makedir.sh rslt_$run_name 1
 
 #    params_card=params.card_new_50MeV
@@ -543,25 +545,27 @@ if [ $iCP == 1 ]; then
     # rho_SK=2.6
     # rho_far=2.75
 
-    # exp=2
-    # L=1000
-    # OAB_SK=3.0
-    # OAB_far=0.5
-    # rho_SK=2.6
-    # rho_far=2.9
+    exp=2
+    L=1000
+    OAB_SK=3.0
+    OAB_far=0.5
+    rho_SK=2.6
+    rho_far=2.9
 #    rho_SK=0
 #    rho_far=0
 
-    exp=3
-    L=295
-    VV=560
-    OAB_SK=2.5
-    OAB_far=2.5
-    rho_SK=2.6
-    rho_far=2.6
+    # exp=3
+    # L=295
+    # VV=560
+    # OAB_SK=2.5
+    # OAB_far=2.5
+    # rho_SK=2.6
+    # rho_far=2.6
 
-#    run_name=test_ih
+#    Run_name=test_ih
 #    run_name=t2kk_3.0_CP_nh_50MeV_40pt
+#    run_name=t2kk_3.0_CP_nh_50MeV_40pt_test
+    run_name=t2kk_3.0_CP_nh_50MeV_40pt_test2
 #    run_name=t2kk_3.0_CP_ih_50MeV_40pt
 #    run_name=t2kk_3.0_CP_nh_50MeV_40pt_10y
 #    run_name=t2kk_2.5_CP_nh_50MeV_40pt
@@ -569,16 +573,16 @@ if [ $iCP == 1 ]; then
 #    run_name=t2ko_2.5_CP_nh_50MeV_40pt
 #    run_name=t2ko_2.5_CP_ih_50MeV_40pt
 #    run_name=t2ko_2.5_CP_nh_50MeV_40pt_10y
-    run_name=t2hk_2.5_CP_nh_50MeV_40pt_10y_30gev_2
+#    run_name=t2hk_2.5_CP_nh_50MeV_40pt_10y_30gev_2
 #    run_name=t2hk_2.5_CP_ih_50MeV_40pt
     makedir.sh rslt_$run_name 0
 
     MH=1
-    YY=13.3
+    YY=5
 
 #    params_card=params.card_new_nosmear
-#    params_card=params.card_new_50MeV
-    params_card=params.card_new_50MeV_nonc
+    params_card=params.card_new_50MeV
+#    params_card=params.card_new_50MeV_nonc
 #    params_card=params.card_new_50MeV_test
     cp -rf temp/$params_card temp/params.card 
 
