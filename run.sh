@@ -64,12 +64,12 @@ if [ $iMH == 1 ]; then
     OAB_SK=3.0
     OAB_far=0.5
 
-#    run_name=t2kk_test
+    run_name=t2kk_test
 #    run_name=t2kk_3.0_MH_50MeV_20pt
-    run_name=t2kk_3.0_MH_50MeV_20pt_effmod
+#    run_name=t2kk_3.0_MH_50MeV_20pt_effmod
 #    run_name=t2kk_2.5_MH_50MeV_20pt
 #    run_name=test
-    makedir.sh rslt_$run_name 0
+    makedir.sh rslt_$run_name 1
 
 #    params_card=params.card_new_nosmear
     params_card=params.card_new_50MeV
@@ -664,6 +664,8 @@ xsecCC_dir=`cat $bindir/xsecCC/xsecCC_dir.txt`
 xsecNC_dir=`cat $bindir/xsecNC/xsecNC_dir.txt`
 echo $xsecCC_dir > rslt_$run_name/xsec_dir.txt
 echo $xsecNC_dir >> rslt_$run_name/xsec_dir.txt
+
+cp -rf beam_neu_dir.txt rslt_$run_name/.
 
 date2=`date`
 echo ""
