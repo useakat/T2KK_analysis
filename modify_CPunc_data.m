@@ -12,7 +12,8 @@ th23 = "0.5";
 rnu = "3";
 ranu = "7";
 
-dir = "./rslt_" <> exp <> "_" <> OAB1 <> "_CP_nh_50MeV_40pt_test";
+(* dir = "./rslt_" <> exp <> "_" <> OAB1 <> "_CP_nh_50MeV_40pt_test2"; *)
+dir = "./rslt_" <> exp <> "_" <> OAB1 <> "_CP_nh_50MeV_40pt_effmod2";
 
 file = dir <> "/CP_true_" <> exp <> "_" <> L <> "_" <> OAB1 <> 
 "_" <>  OAB2 <> "_" <> MH <> "_" <> rnu <> "_" <> ranu <> "_" <> th23 <> 

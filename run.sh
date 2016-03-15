@@ -2,8 +2,8 @@
 date1=`date`
 echo $date1
 
-iMH=0 # switch for MH sensitivity analysis
-iCP=1 # switch for CP sensitivity analysis
+iMH=1 # switch for MH sensitivity analysis
+iCP=0 # switch for CP sensitivity analysis
 ichi2_CP=0 # switch for chi2-CP plots
 ichi2_th23=0 # switch for chi2-th23 plots
 iCP_th23=0 # switch for CP-th23 plots
@@ -63,7 +63,8 @@ if [ $iMH == 1 ]; then
     OAB_far=0.5
 
 #    run_name=t2kk_test
-    run_name=t2kk_3.0_MH_50MeV_20pt
+#    run_name=t2kk_3.0_MH_50MeV_20pt
+    run_name=t2kk_3.0_MH_50MeV_20pt_effmod
 #    run_name=t2kk_2.5_MH_50MeV_20pt
 #    run_name=test
     makedir.sh rslt_$run_name 0
@@ -76,7 +77,7 @@ if [ $iMH == 1 ]; then
     sed -e "s/ thatm .*/ thatm $th23/" \
    	-e "s/ fthatm .*/ fthatm $th23/" temp/params.card > params_card.tmp
     mv params_card.tmp temp/params.card
-    ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far 1 0 0
+    ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far 1 0 1
 #    ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far -1 0 1
 
 fi
@@ -565,7 +566,10 @@ if [ $iCP == 1 ]; then
 #    Run_name=test_ih
 #    run_name=t2kk_3.0_CP_nh_50MeV_40pt
 #    run_name=t2kk_3.0_CP_nh_50MeV_40pt_test
-    run_name=t2kk_3.0_CP_nh_50MeV_40pt_test2
+#    run_name=t2kk_3.0_CP_nh_50MeV_40pt_test2
+#    run_name=t2kk_3.0_CP_nh_50MeV_40pt_effmod
+#    run_name=t2kk_3.0_CP_nh_50MeV_40pt_effmod_test2
+    run_name=t2kk_3.0_CP_nh_50MeV_40pt_effmod2
 #    run_name=t2kk_3.0_CP_ih_50MeV_40pt
 #    run_name=t2kk_3.0_CP_nh_50MeV_40pt_10y
 #    run_name=t2kk_2.5_CP_nh_50MeV_40pt
