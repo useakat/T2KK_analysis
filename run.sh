@@ -1,4 +1,6 @@
 #!/bin/bash
+maindir=`cat maindir.txt`
+bindir=`cat beam_neu_dir.txt`
 date1=`date`
 echo $date1
 
@@ -657,6 +659,11 @@ if [ $ith23_dmatm == 1 ]; then
     ./th23_dmatm_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $th23 $dmatm 1
     mv rslt_unit_out/* rslt_$run_name/.
 fi
+
+xsecCC_dir=`cat $bindir/xsecCC/xsecCC_dir.txt`
+xsecNC_dir=`cat $bindir/xsecNC/xsecNC_dir.txt`
+echo $xsecCC_dir > rslt_$run_name/xsec_dir.txt
+echo $xsecNC_dir >> rslt_$run_name/xsec_dir.txt
 
 date2=`date`
 echo ""
