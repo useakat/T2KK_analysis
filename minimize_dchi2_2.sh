@@ -53,6 +53,7 @@ file1=CPscan.dat
 rm -rf $file1
 touch $file1
 dchi2min=1000000
+
 i=1
 while [ $i -lt $n ];do
     dchi2[$i]=`cat par_${i}/rslt_run/data/dchi2.dat`

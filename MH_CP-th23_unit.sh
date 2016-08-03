@@ -113,6 +113,7 @@ while [ $xx_th23 -eq 0 ];do
     xx_th23=`echo "$th23 > $max_th23" | bc` 
 done
 cp -rf par_1/rslt_out/params.card $outdir/.
+cp -rf par_1/rslt_out/data $outdir/basic_data
 
 if [ $mail -eq 1 ]; then
     bsub -q e -J MH_CP-th23 -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1

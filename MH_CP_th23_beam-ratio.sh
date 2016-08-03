@@ -83,7 +83,12 @@ mv rslt_unit_out/* $outdir/.
 #gnuplot $gnufile
 #cd ..
 
-mv $outdir rslt_$run/.
+if [ -e rslt_$run/$outdir ]; then
+    rm -rf rslt_$run/$outdir
+    mv $outdir rslt_$run/.
+else
+    mv $outdir rslt_$run/.
+fi
 
 rm -rf rslt_unit_out
 date2=`date`
