@@ -1,1 +1,1 @@
-/gpfs/home/th/takaesu/projects/T2KK/beam_neu_v1
+/gpfs/home/th/takaesu/projects/T2HKK/beam_neu_v1

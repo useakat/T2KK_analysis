@@ -94,7 +94,7 @@ c ioct ! 1:sin(th_atm)^2 > 0.5 -1:sin(th_atm)^2 <= 0.5
 c      ! Valid only for ithatm=1
 C*************************************************
   iinput   2  ! 1:ssol 2:s12
-  ithatm   2  ! 1:thatm = s2atm2  2:thatm = satm2
+  ithatm   2  ! 1:thatm = s2atm^2  2:thatm = satm^2
   ioct     -1 ! Only valid for ithatm = 1
   idmatm2  2  ! 1:dm2atm = dm^2_31 2:dm2atm = dm^2_32 	
   MH  1
@@ -133,7 +133,7 @@ C*************************************************
   ichi2_dmatm_2 1       
 
   fdCP          0      
-  err_dCP       10     
+  err_dCP       180     
   ifit_dCP      1       
   ichi2_dCP     0       
 C*************************************************

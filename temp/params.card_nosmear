@@ -25,7 +25,7 @@ C*************************************************
    Semax    5.9d0 
    Smmin    0.4d0 
    Smmax    5.9d0 
-   Sbfactor 4  ! should be 4 for mode = 1    
+   Sbfactor 1  ! should be 4 for mode = 1    
   iOki  0
    Orho  2.75d0
    OV    100d0
@@ -35,7 +35,7 @@ C*************************************************
    Oemax    5.9d0 
    Ommin    0.4d0 
    Ommax    5.9d0 
-   Obfactor 4  ! should be 4 for mode = 1    
+   Obfactor 1  ! should be 4 for mode = 1    
   iKr   1
    Krho  2.9d0
 c   Krho  2.90d0  ! Oki
@@ -47,7 +47,7 @@ c   Krho  3.0d0  ! re
    Kemax    5.9d0 
    Kmmin    0.4d0 
    Kmmax    5.9d0 
-   Kbfactor 4  ! should be 4 for mode = 1    
+   Kbfactor 1  ! should be 4 for mode = 1    
   iNne  1      
   iNnm  1     
   iNae  1      

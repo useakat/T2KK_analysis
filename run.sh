@@ -51,8 +51,9 @@ if [ $iMH == 1 ]; then
     # rm -rf rslt_unit_out
 
 ### MH sensitivity study (nu vs anti-nu beam ratio)
-#    ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far 1 1 1
-#    ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far -1 1 1
+#    run_name=T2HKK_H_MH
+    run_name=T2KK_MH_test5
+    makedir.sh rslt_$run_name 0
 
     # exp=1
     # L=653
@@ -60,29 +61,48 @@ if [ $iMH == 1 ]; then
     # OAB_far=0.9
 
     exp=2
-    L=1000
-    OAB_SK=3.0
-    OAB_far=0.5
+    OAB_SK=2.5
+    L=1090
+    OAB_far=1.4
 
-    run_name=t2kk_test
-#    run_name=t2kk_3.0_MH_50MeV_20pt
-#    run_name=t2kk_3.0_MH_50MeV_20pt_effmod
-#    run_name=t2kk_2.5_MH_50MeV_20pt
-#    run_name=test
-    makedir.sh rslt_$run_name 1
-
-#    params_card=params.card_new_nosmear
-    params_card=params.card_new_50MeV
+## Setting parameter card
+#    params_card=params.card_new_50MeV
+    params_card=params.card_new_50MeV_nosmear
     cp -rf temp/$params_card temp/params.card 
 
-    th23=0.5
-    sed -e "s/ thatm .*/ thatm $th23/" \
-   	-e "s/ fthatm .*/ fthatm $th23/" temp/params.card > params_card.tmp
+    SV=122.5
+    sed -e "s/ SV .*/ SV $SV/" temp/params.card > params_card.tmp
     mv params_card.tmp temp/params.card
-    ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far 1 0 1
-#    ./MH_CP-th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far -1 0 1
+
+## Run
+    MH=1 # True mass hierarcy choice 1:NH -1:IH
+#    th23=0.4 # xa = 0.2
+#    ./MH_CP_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH 0 1
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    th23=0.45 # xa = 0.1
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+    th23=0.5 # xa = 0
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
+#    th23=0.55 # xa = -0.1
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    th23=0.6 # xa = -0.2
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
+
+    MH=-1 # True mass hierarcy choice 1:NH -1:IH
+#    th23=0.4 # xa = 0.2
+#    ./MH_CP_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH 0 1
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    th23=0.45 # xa = 0.1
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+    th23=0.5 # xa = 0
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
+#    th23=0.55 # xa = -0.1
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    th23=0.6 # xa = -0.2
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
 
 fi
+
 
 ### CP sensitivity study 
 # chi2-CP plot
