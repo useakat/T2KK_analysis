@@ -51,8 +51,8 @@ if [ $iMH == 1 ]; then
     # rm -rf rslt_unit_out
 
 ### MH sensitivity study (nu vs anti-nu beam ratio)
-#    run_name=T2HKK_H_MH
-    run_name=T2KK_MH_test6
+    run_name=T2HKK_H_MH
+#    run_name=T2KK_MH_test9
     makedir.sh rslt_$run_name 0
 
     # exp=1
@@ -62,16 +62,16 @@ if [ $iMH == 1 ]; then
 
     exp=2
     OAB_SK=2.5
-    L=1090
+    L=1000
     OAB_far=1.0
 
 ## Setting parameter card
-#    params_card=params.card_new_50MeV
+    params_card=params.card_new_50MeV
 #    params_card=params.card_new_50MeV_nosmear
-    params_card=params.card_new_50MeV_nosmear_nofit
+#    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
-    SV=122.5
+    SV=22.5
     sed -e "s/ SV .*/ SV $SV/" temp/params.card > params_card.tmp
     mv params_card.tmp temp/params.card
 
@@ -83,7 +83,7 @@ if [ $iMH == 1 ]; then
 #    th23=0.45 # xa = 0.1
 #    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
     th23=0.5 # xa = 0
-    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
 #    th23=0.55 # xa = -0.1
 #    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
 #    th23=0.6 # xa = -0.2
@@ -96,7 +96,7 @@ if [ $iMH == 1 ]; then
 #    th23=0.45 # xa = 0.1
 #    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
     th23=0.5 # xa = 0
-#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
 #    th23=0.55 # xa = -0.1
 #    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
 #    th23=0.6 # xa = -0.2

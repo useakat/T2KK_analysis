@@ -31,40 +31,40 @@ sed -e "s/ thatm .*/ thatm $th23/" \
     -e "s/ fthatm .*/ fthatm $th23/" temp/params.card > params_card.tmp
 mv params_card.tmp temp/params.card
 
-# r_nu=5
-# r_anu=0
-# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
-# mv rslt_unit_out/* $outdir/.
+ r_nu=5
+ r_anu=0
+ ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
+ mv rslt_unit_out/* $outdir/.
 
-# r_nu=4
-# r_anu=1
-# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
-# mv rslt_unit_out/* $outdir/.
+ r_nu=4
+ r_anu=1
+ ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
+ mv rslt_unit_out/* $outdir/.
 
-# r_nu=3
-# r_anu=2
-# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
-# mv rslt_unit_out/* $outdir/.
+ r_nu=3
+ r_anu=2
+ ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
+ mv rslt_unit_out/* $outdir/.
 
 r_nu=1
 r_anu=1
 ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
 mv rslt_unit_out/* $outdir/.
 
-# r_nu=2
-# r_anu=3
-# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
-# mv rslt_unit_out/* $outdir/.
+ r_nu=2
+ r_anu=3
+ ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
+ mv rslt_unit_out/* $outdir/.
 
-# r_nu=1
-# r_anu=4
-# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
-# mv rslt_unit_out/* $outdir/.
+ r_nu=1
+ r_anu=4
+ ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
+ mv rslt_unit_out/* $outdir/.
 
-# r_nu=0
-# r_anu=5
-# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
-# mv rslt_unit_out/* $outdir/.
+ r_nu=0
+ r_anu=5
+ ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
+ mv rslt_unit_out/* $outdir/.
 
 # mares=1210
 # ./set_mares.sh $mares
