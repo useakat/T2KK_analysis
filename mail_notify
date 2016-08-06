@@ -1,0 +1,15 @@
+#!/bin/bash
+
+mail=$1
+job_system=$2
+job_name=$3
+
+if [ $mail -eq 1 ];then
+    if [ $job_system == "kekcc" ];then
+	bsub -q e -J cbscan -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
+    elif [ $job_system == "icrr" ];then
+	pjsub -m e --mail-list useakat@gmail.com -N ${job_name}_finish -j nulljob.sh >/dev/null 2>&1
+    else
+	"ERROR: mail_notify: job mail cannot be send on this system."
+    fi
+fi
