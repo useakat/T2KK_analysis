@@ -1,0 +1,24 @@
+#!/bin/bash
+
+dir=$1
+
+depth=1
+t=`find $dir/par_* -maxdepth $depth -name "bjob*" |wc -l`
+r=`find $dir/par_* -maxdepth $depth -name "run.bjob*" |wc -l`
+w=`find $dir/par_* -maxdepth $depth -name "wait.bjob*" |wc -l`
+d=`find $dir/par_* -maxdepth $depth -name "done.bjob*" |wc -l`
+
+echo "waiting while finishing jobs on cluster"
+while [[  $d -lt $t  ]]; do    
+    echo $w $r $d $t
+    rm -f ../status
+    echo $w $r $d $t > ../status
+    sleep 10
+    t=`find $dir/par_* -maxdepth $depth -name "bjob*" |wc -l`
+    r=`find $dir/par_* -maxdepth $depth -name "run.bjob*" |wc -l`
+    w=`find $dir/par_* -maxdepth $depth -name "wait.bjob*" |wc -l`
+    d=`find $dir/par_* -maxdepth $depth -name "done.bjob*" |wc -l`
+done
+echo $w $r $d $t
+
+sleep 20
