@@ -15,9 +15,21 @@ CP_input=$3
 test_CP=$4
 mail=$5
 
-cluster=kekcc
-jobsys=bsub
-que=s 
+job_system=icrr    # name of computer cluster: kekcc/icrr
+que=s  # e:<10min s:<3h l:<24h h:<1w
+
+# # working space for jobs on a remote server
+# if [ $job_system == "icrr" ];then
+#     work_dir=/disk/th/work/takaesu/$run
+#     if [ -e $work_dir ];then
+# 	echo "$work_dir exists. Delete and remake it"
+# 	rm -rf $work_dir
+#     fi
+#     mkdir $work_dir
+# elif [ $job_system == "kekcc" ];then
+#     work_dir=./
+# fi
+
 rm -rf rslt_$run
 infile=params.card
 imax=$test_CP
@@ -35,19 +47,20 @@ while [ $i -le $imax ];do
 	sed -e "s/ fdCP .*/ fdCP   ${dCP[$i]}/" ../$infile > $infile
 	${bindir}/run.sh run 0 0 0 0
 	cd ..
-    elif [ $run_mode -eq 1 ];then
-	jobname="mindchi2"$RANDOM
-	${maindir}/submit_job.sh $jobsys $que $i $jobname "sed -e 's/ fdCP .*/ fdCP   ${dCP[$i]}/' ../$infile > $infile; \
- ${bindir}/run.sh run 0 0 0 0" $run_mode
-    fi
+     elif [ $run_mode -eq 1 ];then
+	echo "ERROR: minimize_dchi2_2.sh: Sorry, parallel mode is not implemented yet..."
+ # 	jobname="mindchi2"$RANDOM
+ # 	${maindir}/submit_job.sh $job_system $que $i $jobname "sed -e 's/ fdCP .*/ fdCP   ${dCP[$i]}/' ../$infile > $infile; \
+ # ${bindir}/run.sh run 0 0 0 0" $run_mode
+     fi
     i=`expr $i + 1`
     CP=`echo "scale=5; $CP + 360/$imax" | bc`
 done
 n=$i
 
-if [ $run_mode -eq 1 ];then
-    monitor
-fi
+# if [ $run_mode -eq 1 ];then
+#     ./monitor $work_dir
+# fi
 
 file1=CPscan.dat
 rm -rf $file1
@@ -80,11 +93,12 @@ rm -rf tmp
 rm -rf par_*
 
 if [ $mail -eq 1 ]; then
-    if [ $cluster == "kekcc" ]; then
-	bsub -q e -J $run -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
-    else
-	echo "Notification mail cannot be send from this cluster system. Exting..."
-	echo " "
-	exit
-    fi
+./mail_notify $mail $job_system $jobname
+    # if [ $job_system == "kekcc" ]; then
+    # 	bsub -q e -J $run -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
+    # else
+    # 	echo "Notification mail cannot be send from this cluster system. Exting..."
+    # 	echo " "
+    # 	exit
+    # fi
 fi

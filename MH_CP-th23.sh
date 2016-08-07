@@ -12,7 +12,7 @@ r_nu=$6
 r_anu=$7
 CP=$8
 th23=$9
-run_mode=${10}
+run_mode=${10} # 0:CP serial check 1:CP parallel check (not implemented yet)
 
 #cp -rf ${maindir}/temp/params.card_def.nosmear params.card
 #cp -rf ${maindir}/temp/params.card_def params.card
@@ -57,7 +57,8 @@ sed -e "s/ dCP .*/ dCP  $CP/" \
 
 if [ $run_mode -ge 0 ];then
 #    ${maindir}/minimize_dchi2.sh out $run_mode 0
-    ${maindir}/minimize_dchi2_2.sh out $run_mode $CP 4 0
+    run_mode=0 # Parallel run_mode is not implemented yet."
+    ${maindir}/minimize_dchi2_2.sh out $run_mode $CP 4 0 
 elif [ $run_mode -eq -1 ];then
     ${bindir}/run.sh out 0 0 0 0
 fi

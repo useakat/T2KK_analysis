@@ -1,10 +1,11 @@
 #!/bin/bash
 maindir=`cat maindir.txt`
 bindir=`cat beam_neu_dir.txt`
+job_system=`cat job_system.txt`
 date1=`date`
 
 run=$1
-#################  Parameters #################################################
+#################  Parameters ###########################################
 exp=$2 # 1:T2KO 2:T2KK
 if [ $exp -eq 1 ];then
     eexp=t2ko
@@ -19,10 +20,11 @@ OAB_far=$5
 MH=$6
 th23=$7
 idirinit=$8
-mail=$9
-###############################################################################
+submit_mode=$9
+mail=${10}
+#########################################################################
 outdir=${eexp}_${L}_${OAB_SK}_${OAB_far}_${MH}_${th23}_ratio
-makedir.sh $outdir $idirinit
+./makedir.sh $outdir $idirinit
 
 mares=1100
 #./set_mares.sh $mares
@@ -31,48 +33,48 @@ sed -e "s/ thatm .*/ thatm $th23/" \
     -e "s/ fthatm .*/ fthatm $th23/" temp/params.card > params_card.tmp
 mv params_card.tmp temp/params.card
 
- r_nu=5
- r_anu=0
- ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
- mv rslt_unit_out/* $outdir/.
+ # r_nu=5
+ # r_anu=0
+ # ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $submit_mode 0
+ # mv rslt_unit_out/* $outdir/.
 
- r_nu=4
- r_anu=1
- ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
- mv rslt_unit_out/* $outdir/.
+ # r_nu=4
+ # r_anu=1
+ # ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $submit_mode 0
+ # mv rslt_unit_out/* $outdir/.
 
- r_nu=3
- r_anu=2
- ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
- mv rslt_unit_out/* $outdir/.
+ # r_nu=3
+ # r_anu=2
+ # ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $submit_mode 0
+ # mv rslt_unit_out/* $outdir/.
 
 r_nu=1
 r_anu=1
-./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
-mv rslt_unit_out/* $outdir/.
+#./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $submit_mode 0
+#mv rslt_unit_out/* $outdir/.
 
- r_nu=2
- r_anu=3
- ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
- mv rslt_unit_out/* $outdir/.
+ # r_nu=2
+ # r_anu=3
+ # ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $submit_mode 0
+ # mv rslt_unit_out/* $outdir/.
 
- r_nu=1
- r_anu=4
- ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
- mv rslt_unit_out/* $outdir/.
+ # r_nu=1
+ # r_anu=4
+ # ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $submit_mode 0
+ # mv rslt_unit_out/* $outdir/.
 
- r_nu=0
- r_anu=5
- ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
- mv rslt_unit_out/* $outdir/.
+ # r_nu=0
+ # r_anu=5
+ # ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $submit_mode 0
+ # mv rslt_unit_out/* $outdir/.
 
 # mares=1210
 # ./set_mares.sh $mares
-# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
+# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $job_system $submit_mode 0
 # mv rslt_unit_out/* $outdir/.
 # mares=990
 # ./set_mares.sh $mares
-# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares 0
+# ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $job_system $submit_mode 0
 # mv rslt_unit_out/* $outdir/.
 
 #gnufile=mh_cp-th23.gnu
@@ -83,18 +85,19 @@ mv rslt_unit_out/* $outdir/.
 #gnuplot $gnufile
 #cd ..
 
-if [ -e rslt_$run/$outdir ]; then
-    rm -rf rslt_$run/$outdir
-    mv $outdir rslt_$run/.
-else
-    mv $outdir rslt_$run/.
-fi
+# if [ -e rslt_$run/$outdir ]; then
+#     rm -rf rslt_$run/$outdir
+#     mv $outdir rslt_$run/.
+# else
+#     mv $outdir rslt_$run/.
+# fi
 
-rm -rf rslt_unit_out
+# rm -rf rslt_unit_out
 date2=`date`
 echo $date1
 echo $date2
 
 if [ $mail -eq 1 ]; then
-    bsub -q e -J MH_CP -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
+    ./mail_notify $mail $job_system MH_CP_th23_beam-ratio
+#    bsub -q e -J MH_CP -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
 fi

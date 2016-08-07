@@ -51,9 +51,10 @@ if [ $iMH == 1 ]; then
     # rm -rf rslt_unit_out
 
 ### MH sensitivity study (nu vs anti-nu beam ratio)
-    run_name=T2HKK_H_MH
-#    run_name=T2KK_MH_test9
-    makedir.sh rslt_$run_name 0
+#    run_name=T2HKK_H_MH
+#    run_name=parallel_test
+    run_name=parallel_test2
+    ./makedir.sh rslt_$run_name 0
 
     # exp=1
     # L=653
@@ -75,32 +76,34 @@ if [ $iMH == 1 ]; then
     sed -e "s/ SV .*/ SV $SV/" temp/params.card > params_card.tmp
     mv params_card.tmp temp/params.card
 
+rm -rf par_*
+run_mode=1 # 0:serial run 1:parallel run
 ## Run
     MH=1 # True mass hierarcy choice 1:NH -1:IH
 #    th23=0.4 # xa = 0.2
 #    ./MH_CP_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH 0 1
-#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 0
 #    th23=0.45 # xa = 0.1
-#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 0
     th23=0.5 # xa = 0
-    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 1
 #    th23=0.55 # xa = -0.1
-#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 0
 #    th23=0.6 # xa = -0.2
-#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 1
 
     MH=-1 # True mass hierarcy choice 1:NH -1:IH
 #    th23=0.4 # xa = 0.2
 #    ./MH_CP_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH 0 1
-#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 0
 #    th23=0.45 # xa = 0.1
-#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 0
     th23=0.5 # xa = 0
-    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 1
 #    th23=0.55 # xa = -0.1
-#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 0
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 0
 #    th23=0.6 # xa = -0.2
-#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 1
+#    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 1
 
 fi
 
@@ -129,7 +132,7 @@ if [ $ichi2_CP == 1 ]; then
 #    run_name=t2hk_2.5_chi2-CP_nh_50MeV_40pt
     run_name=t2kk_3.0_chi2-CP_nh_50MeV_40pt
 #    run_name=test
-    makedir.sh rslt_$run_name 1
+    ./makedir.sh rslt_$run_name 1
 
 #    params_card=params.card_new_50MeV
     params_card=params.card_new_50MeV_test
@@ -189,7 +192,7 @@ if [ $ichi2_th23 == 1 ]; then
 #    run_name=t2kk_3.0_chi2-th23_nh_50MeV_20pt
 #    run_name=t2hk_2.5_chi2-th23_nh_50MeV_20pt
     run_name=t2hk_2.5_chi2-th23_ih_50MeV_20pt
-    makedir.sh rslt_$run_name 1
+    ./makedir.sh rslt_$run_name 1
 
     params_card=params.card_new_50MeV
     cp -rf temp/$params_card temp/params.card 
@@ -289,7 +292,7 @@ if [ $iCP_th23 == 1 ]; then
 
 #    run_name=t2hk_2.5_CP-th23_nuY4.5
     run_name=test
-    makedir.sh rslt_$run_name 1
+    ./makedir.sh rslt_$run_name 1
 
     params_card=params.card_new_50MeV_elike
     cp -rf temp/$params_card temp/params.card 
@@ -602,7 +605,7 @@ if [ $iCP == 1 ]; then
 #    run_name=t2ko_2.5_CP_nh_50MeV_40pt_10y
 #    run_name=t2hk_2.5_CP_nh_50MeV_40pt_10y_30gev_2
 #    run_name=t2hk_2.5_CP_ih_50MeV_40pt
-    makedir.sh rslt_$run_name 0
+    ./makedir.sh rslt_$run_name 0
 
     MH=1
     YY=5
@@ -667,7 +670,7 @@ if [ $ith23_dmatm == 1 ]; then
 
     run_name=t2kk_3.0_th23_dm32_nh_50MeV_15pt
 #    run_name=test
-    makedir.sh rslt_$run_name 1
+    ./makedir.sh rslt_$run_name 1
 
 #    params_card=params.card_new_nosmear
     params_card=params.card_new_50MeV
