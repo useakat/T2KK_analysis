@@ -53,15 +53,15 @@ C*************************************************
   serror  1d-2
   snmax   10 
   ihisto   2   ! Do not use 1. The integration may not converge.
-  ismear   0   ! 0:no smearing 1:smearing
+  ismear   1   ! 0:no smearing 1:smearing
   iCCQE    1   ! CCQE switch
-  iCCRes   0   ! CCRes switch. Meaningfull when ismear=1.
-  iNC      0   ! NC switch. Meaningfull when ismear=1.
+  iCCRes   1   ! CCRes switch. Meaningfull when ismear=1.
+  iNC      1   ! NC switch. Meaningfull when ismear=1.
   ipi0dist 0   ! Set to 0 unless you want to study NC pi^0 itself.
   ipi0xsec 1   ! 0:NC1pi0 1:NC1pi0BG (polfit) 2:NC1pi0BG (old missID)
   ihfunc   0
-  ieff     0   ! switch for detection efficiency of a Cerenkov ring.  Meaningful when ismear=1
-  imissid  0   ! switch for miss-ID probability.  Meaningful when ismear=1
+  ieff     1   ! switch for detection efficiency of a Cerenkov ring.  Meaningful when ismear=1
+  imissid  1   ! switch for miss-ID probability.  Meaningful when ismear=1
   ipi0unc  0   ! 0:res.1pi0 norm + coh.1pi0 norm 1:NC1pi0 norm + ratio btw res.1pi0 & coh.1pi0 2:Only NC1pi0 unc
   ihypo   -1   ! 1:fit with true MH -1:fit with wrong MH
   iminevents 10 ! required minumum event number in each bin
