@@ -29,9 +29,11 @@ outdir=${eexp}_${L}_${OAB_SK}_${OAB_far}_${MH}_${th23}_ratio
 mares=1100
 #./set_mares.sh $mares
 
-sed -e "s/ thatm .*/ thatm $th23/" \
-    -e "s/ fthatm .*/ fthatm $th23/" temp/params.card > params_card.tmp
-mv params_card.tmp temp/params.card
+#sed -e "s/ thatm .*/ thatm $th23/" \
+#    -e "s/ fthatm .*/ fthatm $th23/" temp/params.card > params_card.tmp
+#mv params_card.tmp temp/params.card
+th23min=$th23
+th23max=$th23
 
  # r_nu=5
  # r_anu=0
@@ -50,8 +52,8 @@ mv params_card.tmp temp/params.card
 
 r_nu=1
 r_anu=1
-#./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $submit_mode 0
-#mv rslt_unit_out/* $outdir/.
+./MH_CP-th23_unit.sh $outdir $exp $L $OAB_SK $OAB_far $MH $th23min $th23max $r_nu $r_anu $mares $submit_mode 0
+mv rslt_unit_out/* $outdir/.
 
  # r_nu=2
  # r_anu=3
@@ -85,14 +87,15 @@ r_anu=1
 #gnuplot $gnufile
 #cd ..
 
-# if [ -e rslt_$run/$outdir ]; then
-#     rm -rf rslt_$run/$outdir
-#     mv $outdir rslt_$run/.
-# else
-#     mv $outdir rslt_$run/.
-# fi
+if [ -e rslt_$run/$outdir ]; then
+    rm -rf rslt_$run/$outdir
+    mv $outdir rslt_$run/.
+else
+    mv $outdir rslt_$run/.
+fi
 
-# rm -rf rslt_unit_out
+rm -rf rslt_unit_out
+
 date2=`date`
 echo $date1
 echo $date2

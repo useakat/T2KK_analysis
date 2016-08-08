@@ -2,16 +2,19 @@
 maindir=`cat maindir.txt`
 job_system=`cat job_system.txt`
 
-iDD=$1 # 1:T2KO 2:T2KK
-L=$2
-OAB_SK=$3
-OAB_far=$4
-MH=$5
-r_nu=$6
-r_anu=$7
-mares=$8
-submit_mode=$9
-mail=${10}
+run=$1
+iDD=$2 # 1:T2KO 2:T2KK
+L=$3
+OAB_SK=$4
+OAB_far=$5
+MH=$6
+min_th23=$7
+max_th23=$8
+r_nu=$9
+r_anu=${10}
+mares=${11}
+submit_mode=${12}
+mail=${13}
 
 que=l  # e:<10min s:<3h l:<24h h:<1w
 
@@ -33,8 +36,8 @@ max_CP=180
 div_CP=19
 #div_CP=1
 
-min_th23=0.5  # sin^2 th23
-max_th23=0.5
+#min_th23=0.5  # sin^2 th23
+#max_th23=0.5
 div_th23=1
 
 #CPscan_mode=1 # 0:serial CP scan 1:parallel CP scan -1:no scan
