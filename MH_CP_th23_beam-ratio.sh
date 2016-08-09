@@ -22,7 +22,8 @@ th23=$7
 idirinit=$8
 submit_mode=$9
 CPscan_mode=${10}
-mail=${11}
+CPscan_div=${11}
+mail=${12}
 #########################################################################
 outdir=${eexp}_${L}_${OAB_SK}_${OAB_far}_${MH}_${th23}_ratio
 ./makedir.sh $outdir $idirinit
@@ -53,7 +54,7 @@ th23max=$th23
 
 r_nu=1
 r_anu=1
-./MH_CP-th23_unit.sh $outdir $exp $L $OAB_SK $OAB_far $MH $th23min $th23max $r_nu $r_anu $mares $submit_mode $CPscan_mode 0
+./MH_CP-th23_unit.sh $outdir $exp $L $OAB_SK $OAB_far $MH $th23min $th23max $r_nu $r_anu $mares $submit_mode $CPscan_mode $CPscan_div 0
 mv rslt_unit_out/* $outdir/.
 
  # r_nu=2

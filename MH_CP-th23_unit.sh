@@ -15,7 +15,8 @@ r_anu=${10}
 mares=${11}
 submit_mode=${12}
 CPscan_mode=${13}
-mail=${14}
+CPscan_div=${14}
+mail=${15}
 
 que=l  # for KEKCC: e:<10min s:<3h l:<24h h:<1w
 
@@ -98,7 +99,7 @@ while [ $xx_th23 -eq 0 ];do
     xx_CP=`echo "$CP > $max_CP" | bc`
     while [ $xx_CP -eq 0 ];do
 	jobname="chi2_oab"$RANDOM
-	./submit_job.sh $job_system $que $i $jobname "${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $CPscan_mode" $submit_mode $work_dir 
+	./submit_job.sh $job_system $que $i $jobname "${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $CPscan_mode $CPscan_div" $submit_mode $work_dir 
 	i=`expr $i + 1`
 	CP=`echo "scale=5; $CP + $step_CP" | bc | sed 's/^\./0./'`
 	xx_CP=`echo "$CP > $max_CP" | bc` 
