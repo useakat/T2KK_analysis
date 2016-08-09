@@ -7,6 +7,7 @@ if [[ "$1" == "-h" ]]; then
 fi
 maindir=`cat maindir.txt`
 bindir=`cat beam_neu_dir.txt`
+job_system=`cat job_system.txt`
 selfdir=$(cd $(dirname $0);pwd)
 
 run=$1
@@ -15,7 +16,6 @@ CP_input=$3
 test_CP=$4
 mail=$5
 
-job_system=icrr    # name of computer cluster: kekcc/icrr
 que=s  # e:<10min s:<3h l:<24h h:<1w
 
 # # working space for jobs on a remote server
@@ -29,6 +29,7 @@ que=s  # e:<10min s:<3h l:<24h h:<1w
 # elif [ $job_system == "kekcc" ];then
 #     work_dir=./
 # fi
+work_dir=./
 
 rm -rf rslt_$run
 infile=params.card
@@ -48,19 +49,19 @@ while [ $i -le $imax ];do
 	${bindir}/run.sh run 0 0 0 0
 	cd ..
      elif [ $run_mode -eq 1 ];then
-	echo "ERROR: minimize_dchi2_2.sh: Sorry, parallel mode is not implemented yet..."
- # 	jobname="mindchi2"$RANDOM
- # 	${maindir}/submit_job.sh $job_system $que $i $jobname "sed -e 's/ fdCP .*/ fdCP   ${dCP[$i]}/' ../$infile > $infile; \
- # ${bindir}/run.sh run 0 0 0 0" $run_mode
+#	echo "ERROR: minimize_dchi2_2.sh: Sorry, parallel mode is not implemented yet..."
+  	jobname="mindchi2"$RANDOM
+  	${maindir}/submit_job.sh $job_system $que $i $jobname "sed -e 's/ fdCP .*/ fdCP   ${dCP[$i]}/' ../$infile > $infile; \
+        ${bindir}/run.sh run 0 0 0 0" $run_mode $work_dir
      fi
     i=`expr $i + 1`
     CP=`echo "scale=5; $CP + 360/$imax" | bc`
 done
 n=$i
 
-# if [ $run_mode -eq 1 ];then
-#     ./monitor $work_dir
-# fi
+ if [ $run_mode -eq 1 ];then
+     ./monitor $work_dir
+ fi
 
 file1=CPscan.dat
 rm -rf $file1
@@ -94,11 +95,4 @@ rm -rf par_*
 
 if [ $mail -eq 1 ]; then
 ./mail_notify $mail $job_system $jobname
-    # if [ $job_system == "kekcc" ]; then
-    # 	bsub -q e -J $run -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
-    # else
-    # 	echo "Notification mail cannot be send from this cluster system. Exting..."
-    # 	echo " "
-    # 	exit
-    # fi
 fi

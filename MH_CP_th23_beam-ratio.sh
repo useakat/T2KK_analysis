@@ -21,7 +21,8 @@ MH=$6
 th23=$7
 idirinit=$8
 submit_mode=$9
-mail=${10}
+CPscan_mode=${10}
+mail=${11}
 #########################################################################
 outdir=${eexp}_${L}_${OAB_SK}_${OAB_far}_${MH}_${th23}_ratio
 ./makedir.sh $outdir $idirinit
@@ -52,7 +53,7 @@ th23max=$th23
 
 r_nu=1
 r_anu=1
-./MH_CP-th23_unit.sh $outdir $exp $L $OAB_SK $OAB_far $MH $th23min $th23max $r_nu $r_anu $mares $submit_mode 0
+./MH_CP-th23_unit.sh $outdir $exp $L $OAB_SK $OAB_far $MH $th23min $th23max $r_nu $r_anu $mares $submit_mode $CPscan_mode 0
 mv rslt_unit_out/* $outdir/.
 
  # r_nu=2
@@ -102,5 +103,4 @@ echo $date2
 
 if [ $mail -eq 1 ]; then
     ./mail_notify $mail $job_system MH_CP_th23_beam-ratio
-#    bsub -q e -J MH_CP -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
 fi

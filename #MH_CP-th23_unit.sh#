@@ -14,8 +14,7 @@ r_nu=$9
 r_anu=${10}
 mares=${11}
 submit_mode=${12}
-CPscan_mode=${13}
-mail=${14}
+mail=${13}
 
 que=l  # for KEKCC: e:<10min s:<3h l:<24h h:<1w
 
@@ -34,8 +33,8 @@ fi
 
 min_CP=-180
 max_CP=180
-div_CP=19
-#div_CP=1
+#div_CP=19
+div_CP=1
 
 div_th23=1
 ######################## Parameter check #################################
@@ -98,7 +97,7 @@ while [ $xx_th23 -eq 0 ];do
     xx_CP=`echo "$CP > $max_CP" | bc`
     while [ $xx_CP -eq 0 ];do
 	jobname="chi2_oab"$RANDOM
-	./submit_job.sh $job_system $que $i $jobname "${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $CPscan_mode" $submit_mode $work_dir 
+	./submit_job.sh $job_system $que $i $jobname "${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 1" $submit_mode $work_dir 
 	i=`expr $i + 1`
 	CP=`echo "scale=5; $CP + $step_CP" | bc | sed 's/^\./0./'`
 	xx_CP=`echo "$CP > $max_CP" | bc` 
@@ -135,7 +134,7 @@ done
 cp -rf par_1/rslt_out/params.card $outdir/.
 cp -rf par_1/rslt_out/data $outdir/basic_data
 
-rm -rf par_*
+xrm -rf par_*
 
 if [ $mail -eq 1 ]; then
     ./mail_notify $mail $job_system $jobname

@@ -57,13 +57,10 @@ sed -e "s/ dCP .*/ dCP  $CP/" \
 
 if [ $run_mode -ge 0 ];then
 #    ${maindir}/minimize_dchi2.sh out $run_mode 0
-    run_mode=0 # Parallel run_mode is not implemented yet."
+#    run_mode=0 # Parallel run_mode is not implemented yet."
     ${maindir}/minimize_dchi2_2.sh out $run_mode $CP 4 0 
 elif [ $run_mode -eq -1 ];then
     ${bindir}/run.sh out 0 0 0 0
 fi
 
 rm -rf tmp.card
-
-#    -e "s/ s2rct_2 .*/ s2rct_2 $th23/" \
-#    -e "s/ fs2rct_2 .*/ fs2rct_2 $th23/" \

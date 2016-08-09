@@ -25,6 +25,7 @@ mkdir $dir
 cd $dir
 cp -rf $maindir/maindir.txt .
 cp -rf $maindir/beam_neu_dir.txt .
+cp -rf $maindir/job_system.txt .
 
 echo "#!/bin/bash" > $njob$i
 echo "" >> $njob$i
@@ -42,6 +43,11 @@ fi
 echo '#------- Program execution -------#' >> $njob$i
 echo 'start=`date`' >> $njob$i
 echo 'echo $start >allprocess.log' >> $njob$i
+echo 'cp -rf ../monitor .' >> $njob$i
+echo 'chmod +x monitor' >> $njob$i
+echo 'cp -rf ../submit_job.sh .' >> $njob$i
+echo 'chmod +x submit_job.sh' >> $njob$i
+echo 'cp -rf ../maindir.txt .' >> $njob$i
 echo "rm -rf wait.${njob}$i" >> $njob$i
 echo "touch run.${njob}$i" >> $njob$i
 echo "$command >>allprocess.log 2>&1" >> $njob$i
@@ -61,6 +67,7 @@ if [ $submit_mode -eq 0 ];then
 else
     if [ $job_system == "kekcc" ];then
 #    bsub -q $que -J $jobname ./$njob$i 1>/dev/null
+	echo "job_$i submitted"
 	bsub -q $que -J $jobname ./$njob$i
     elif [ $job_system == "icrr" ];then
 	pjsub -N $jobname -j $njob$i

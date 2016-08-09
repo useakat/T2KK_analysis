@@ -11,6 +11,7 @@
 3. modify maindir.txt and beam_neu_dir.txt properly
    maindir.txt: specify the location of this directory 
    beam_neu_dir.txt: specify the location of the program directory (beam_neu_v1)
+   job_system.txt: specify the job system: kekcc/icrr/none
 
 3. modify run.sh 
 
