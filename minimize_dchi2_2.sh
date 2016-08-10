@@ -59,9 +59,9 @@ while [ $i -le $imax ];do
 done
 n=$i
 
- if [ $run_mode -eq 1 ];then
-     ./monitor $work_dir
- fi
+if [ $run_mode -eq 1 ];then
+    ./monitor $work_dir
+fi
 
 file1=CPscan.dat
 rm -rf $file1
@@ -91,7 +91,7 @@ done
 mv $file1 rslt_$run/.
 cp -rf $infile rslt_$run/.
 rm -rf tmp
-rm -rf par_*
+#rm -rf par_*
 
 if [ $mail -eq 1 ]; then
 ./mail_notify $mail $job_system $jobname

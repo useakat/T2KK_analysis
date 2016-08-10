@@ -1,27 +1,29 @@
 #!/bin/bash
 if [[ "$1" == "-h" ]]; then
     echo ""
-    echo "Usage: submit_job.sh [job_system] [que] [i] [jobname] [command] [submit_mode] [work_dir]"
+    echo "Usage: submit_job.sh [que] [i] [jobname] [command] [submit_mode] [work_dir]"
     echo ""
     exit
 fi
 
 maindir=`cat maindir.txt`
+job_system=`cat job_system.txt`
 
-job_system=$1
-que=$2
-i=$3
-jobname=$4
-command="$5"
-submit_mode=$6
-work_dir=$7
+que=$1
+i=$2
+jobname=$3
+command="$4"
+submit_mode=$5
+work_dir=$6
 
 njob=bjob
 
 dir=par_$i
-cd $work_dir
-echo "moved to $work_dir"
-mkdir $dir
+if [ $work_dir != "0" ];then
+    cd $work_dir
+    echo "moved to $work_dir"
+fi
+$maindir/makedir.sh $dir 0
 cd $dir
 
 echo "#!/bin/bash" > $njob$i
@@ -63,6 +65,7 @@ if [ $submit_mode -eq 0 ];then
     ./$njob$i
     echo "job$i finished"
     echo
+    rm -rf *.${njob}$i
 else
     if [ $job_system == "kekcc" ];then
 	bsub -q $que -J $jobname ./$njob$i

@@ -2,22 +2,24 @@
 
 dir=$1
 
-depth=1
-t=`find $dir/par_* -maxdepth $depth -name "bjob*" |wc -l`
-r=`find $dir/par_* -maxdepth $depth -name "run.bjob*" |wc -l`
+depth=2
+#t=`find $dir/par_* -maxdepth $depth -name "bjob*" |wc -l`
 w=`find $dir/par_* -maxdepth $depth -name "wait.bjob*" |wc -l`
+r=`find $dir/par_* -maxdepth $depth -name "run.bjob*" |wc -l`
 d=`find $dir/par_* -maxdepth $depth -name "done.bjob*" |wc -l`
+t=`expr $r + $w + $d`
 
 echo "waiting while finishing jobs on cluster"
 while [[  $d -lt $t  ]]; do    
     echo $w $r $d $t
-    rm -f ../status
-    echo $w $r $d $t > ../status
+#    rm -f ../status
+#    echo $w $r $d $t > ../status
     sleep 10
-    t=`find $dir/par_* -maxdepth $depth -name "bjob*" |wc -l`
-    r=`find $dir/par_* -maxdepth $depth -name "run.bjob*" |wc -l`
+#    t=`find $dir/par_* -maxdepth $depth -name "bjob*" |wc -l`
     w=`find $dir/par_* -maxdepth $depth -name "wait.bjob*" |wc -l`
+    r=`find $dir/par_* -maxdepth $depth -name "run.bjob*" |wc -l`
     d=`find $dir/par_* -maxdepth $depth -name "done.bjob*" |wc -l`
+    t=`expr $r + $w + $d`
 done
 echo $w $r $d $t
 

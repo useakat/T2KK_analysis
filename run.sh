@@ -71,8 +71,8 @@ if [ $iMH == 1 ]; then
 
 ## Setting parameter card
 #    params_card=params.card_new_50MeV
-#    params_card=params.card_new_50MeV_nosmear
-    params_card=params.card_new_50MeV_nosmear_nofit
+    params_card=params.card_new_50MeV_nosmear
+#    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
     SV=122.5
@@ -80,7 +80,6 @@ if [ $iMH == 1 ]; then
     mv params_card.tmp temp/params.card
 
 run_mode=1 # 0:serial run 1:parallel run
-CPscan_mode=1 # 0:serial scan 1:parallel scan
 CPscan_div=4
 ## Run
    MH=1 # True mass hierarcy choice 1:NH -1:IH
@@ -99,7 +98,7 @@ CPscan_div=4
    # th23=0.55 # xa = -0.1
    # ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 1
 
-   MH=-1 # True mass hierarcy choice 1:NH -1:IH
+   MH=1 # True mass hierarcy choice 1:NH -1:IH
    # th23=0.4 # xa = 0.2
    # rm -rf par_*
    # ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 1
@@ -108,7 +107,7 @@ CPscan_div=4
    # ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 1
    th23=0.6 # xa = -0.2
    rm -rf par_*
-   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_mode $CPscan_div 1
+   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
 #    th23=0.45 # xa = 0.
 #    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode 1
 #    th23=0.55 # xa = -0.1

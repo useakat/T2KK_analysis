@@ -14,9 +14,8 @@ r_nu=$9
 r_anu=${10}
 mares=${11}
 submit_mode=${12}
-CPscan_mode=${13}
-CPscan_div=${14}
-mail=${15}
+CPscan_div=${13}
+mail=${14}
 
 que=l  # for KEKCC: e:<10min s:<3h l:<24h h:<1w
 
@@ -35,8 +34,8 @@ fi
 
 min_CP=-180
 max_CP=180
-#div_CP=19
-div_CP=1
+div_CP=19
+#div_CP=1
 
 div_th23=1
 ######################## Parameter check #################################
@@ -91,6 +90,8 @@ touch $outfile
 outdir=rslt_unit_out
 ./makedir.sh $outdir 1
 
+# submit jobs
+prog_mode=1
 i=1
 th23=$min_th23
 xx_th23=`echo "$th23 > $max_th23" | bc`
@@ -98,8 +99,13 @@ while [ $xx_th23 -eq 0 ];do
     CP=$min_CP
     xx_CP=`echo "$CP > $max_CP" | bc`
     while [ $xx_CP -eq 0 ];do
+	# dir=par_$i
+	# cd $work_dir
+	# mkdir $dir
+	# cd $dir
 	jobname="chi2_oab"$RANDOM
-	./submit_job.sh $job_system $que $i $jobname "${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $CPscan_mode $CPscan_div" $submit_mode $work_dir 
+	./submit_job.sh $que $i $jobname "${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $submit_mode $CPscan_div $prog_mode" 0 $work_dir 
+#	${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $CPscan_mode $CPscan_div $prog_mode
 	i=`expr $i + 1`
 	CP=`echo "scale=5; $CP + $step_CP" | bc | sed 's/^\./0./'`
 	xx_CP=`echo "$CP > $max_CP" | bc` 
@@ -111,6 +117,27 @@ done
 if [ $submit_mode -eq 1 ];then
     ./monitor $work_dir
 fi
+
+# combine jobs
+prog_mode=2
+i=1
+th23=$min_th23
+xx_th23=`echo "$th23 > $max_th23" | bc`
+while [ $xx_th23 -eq 0 ];do
+    CP=$min_CP
+    xx_CP=`echo "$CP > $max_CP" | bc`
+    while [ $xx_CP -eq 0 ];do
+#	jobname="chi2_oab"$RANDOM
+	jobname="dummy"
+	./submit_job.sh $que $i $jobname "${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $submit_mode $CPscan_div $prog_mode" 0 $work_dir 
+	i=`expr $i + 1`
+	CP=`echo "scale=5; $CP + $step_CP" | bc | sed 's/^\./0./'`
+	xx_CP=`echo "$CP > $max_CP" | bc` 
+    done
+    th23=`echo "scale=5; $th23 + $step_th23" | bc | sed 's/^\./0./'`
+    xx_th23=`echo "$th23 > $max_th23" | bc` 
+done
+
 if [ $job_system == "icrr" ];then
     cp -rf $work_dir/* .
     rm -rf $work_dir
@@ -136,7 +163,7 @@ done
 cp -rf par_1/rslt_out/params.card $outdir/.
 cp -rf par_1/rslt_out/data $outdir/basic_data
 
-#rm -rf par_*
+rm -rf par_*
 
 if [ $mail -eq 1 ]; then
     ./mail_notify $mail $job_system $jobname
