@@ -83,7 +83,9 @@ mv tmp.card params.card
 
 if [ $run_mode -ge 0 ];then
 #    ${maindir}/minimize_dchi2_2.sh out $run_mode $CP_input 4 0
-    ${maindir}/minimize_dchi2_2.sh out $run_mode $CP_input 1 0
+#    ${maindir}/minimize_dchi2_2.sh out $run_mode $CP_input 1 0
+    prog_mode=0
+    ${maindir}/minimize_dchi2_3.sh out $prog_mode $run_mode $CP_input 1 0
 elif [ $run_mode -eq -1 ];then
     ${bindir}/run.sh out 0 0 0 0
 fi

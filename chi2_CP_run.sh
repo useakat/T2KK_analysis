@@ -1,6 +1,7 @@
 #!/bin/bash
 maindir=`cat maindir.txt`
 bindir=`cat beam_neu_dir.txt`
+job_system=`cat job_system.txt`
 date1=`date`
 
 run=$1
@@ -28,12 +29,13 @@ mail=${14}
 
 min_CP=-180
 max_CP=180
-div_CP=29
-###############################################################################
+div_CP=20
+#div_CP=2
+##########################################################################
 outdir=${CPmode}_${fitMH}_${eexp}_${L}_${OAB_SK}_${OAB_far}_${MH}_${r_nu}_${r_anu}_${CP_input}
-makedir.sh $outdir 1
+./makedir.sh $outdir 1
 
-./chi2_scan.sh $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH $fitMH $r_nu $r_anu CP $CP_input $min_CP $max_CP $div_CP 0
+./chi2_scan.sh $outdir $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH $fitMH $r_nu $r_anu CP $CP_input $min_CP $max_CP $div_CP 0
 
 cp -rf rslt_unit_out/* $outdir/.
 cp -rf chi2_CP_run.sh $outdir/.
