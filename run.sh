@@ -51,11 +51,11 @@ if [ $iMH == 1 ]; then
     # rm -rf rslt_unit_out
 
 ### MH sensitivity study (nu vs anti-nu beam ratio)
-#    run_name=T2HKK_H_MH_icrr
+    run_name=T2HKK_H_MH_icrr
 #    run_name=T2HKK_H_MH_kekcc
 #    run_name=T2HKK_H_MH_icrr_test
 #    run_name=parallel_test
-    run_name=CPscan_test_div16
+#    run_name=CPscan_test_div16
 #    run_name=parallel_test2
     ./makedir.sh rslt_$run_name 0
 
@@ -70,9 +70,9 @@ if [ $iMH == 1 ]; then
     OAB_far=1.3
 
 ## Setting parameter card
-    params_card=params.card_new_50MeV
+#    params_card=params.card_new_50MeV
 #    params_card=params.card_new_50MeV_nosmear
-#    params_card=params.card_new_50MeV_nosmear_nofit
+    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
     SV=122.5
@@ -81,7 +81,7 @@ if [ $iMH == 1 ]; then
 
 run_mode=1 # 0:serial run 1:parallel run
 CPscan_mode=1 # 0:serial scan 1:parallel scan
-CPscan_div=16
+CPscan_div=4
 ## Run
    MH=1 # True mass hierarcy choice 1:NH -1:IH
    # th23=0.4 # xa = 0.2

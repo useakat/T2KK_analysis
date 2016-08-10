@@ -35,8 +35,8 @@ fi
 
 min_CP=-180
 max_CP=180
-div_CP=19
-#div_CP=1
+#div_CP=19
+div_CP=1
 
 div_th23=1
 ######################## Parameter check #################################
@@ -136,7 +136,7 @@ done
 cp -rf par_1/rslt_out/params.card $outdir/.
 cp -rf par_1/rslt_out/data $outdir/basic_data
 
-rm -rf par_*
+#rm -rf par_*
 
 if [ $mail -eq 1 ]; then
     ./mail_notify $mail $job_system $jobname
