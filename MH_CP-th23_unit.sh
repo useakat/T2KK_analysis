@@ -18,7 +18,6 @@ CPscan_div=${13}
 mail=${14}
 
 que=l  # for KEKCC: e:<10min s:<3h l:<24h h:<1w
-
 ######################  Parameters #######################################
 # working space for jobs on a remote server
 if [ $job_system == "icrr" ];then
@@ -34,7 +33,7 @@ fi
 
 min_CP=-180
 max_CP=180
-div_CP=19
+div_CP=20
 #div_CP=1
 
 div_th23=1
@@ -99,13 +98,8 @@ while [ $xx_th23 -eq 0 ];do
     CP=$min_CP
     xx_CP=`echo "$CP > $max_CP" | bc`
     while [ $xx_CP -eq 0 ];do
-	# dir=par_$i
-	# cd $work_dir
-	# mkdir $dir
-	# cd $dir
 	jobname="chi2_oab"$RANDOM
 	./submit_job.sh $que $i $jobname "${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $submit_mode $CPscan_div $prog_mode" 0 $work_dir 
-#	${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $CPscan_mode $CPscan_div $prog_mode
 	i=`expr $i + 1`
 	CP=`echo "scale=5; $CP + $step_CP" | bc | sed 's/^\./0./'`
 	xx_CP=`echo "$CP > $max_CP" | bc` 
@@ -127,7 +121,6 @@ while [ $xx_th23 -eq 0 ];do
     CP=$min_CP
     xx_CP=`echo "$CP > $max_CP" | bc`
     while [ $xx_CP -eq 0 ];do
-#	jobname="chi2_oab"$RANDOM
 	jobname="dummy"
 	./submit_job.sh $que $i $jobname "${maindir}/MH_CP-th23.sh $iDD $L $OAB_SK $OAB_far $MH $r_nu $r_anu $CP $th23 $submit_mode $CPscan_div $prog_mode" 0 $work_dir 
 	i=`expr $i + 1`

@@ -45,7 +45,15 @@ elif [ $iDD -eq 3 ];then # T2HK (HK = 100kton +SK)
 	-e "s/ Orho .*/Orho  $rho_far/" \
 	-e "s/ OL .*/ OL  $L/" \
 	-e "s/ OOAB .*/ OOAB   $OAB_far/" \
-	-e "s/iKr .*/iKr   0/" tmp.card > params.card
+	-e "s/iKr .*/iKr   0/" params.card > tmp.card
+fi
+sed -n "/iinput/,/dCP/p" tmp.card > tmp2.card
+line=`grep ithatm tmp2.card`
+line2=${line#*ithatm}
+line3=${line2%%\!*}
+line4=${line3%%ioct*}
+if [ $line4 -eq 1 ];then
+    th23=`echo "scale=5; 4*$th23 -4*$th23^2" | bc | sed 's/^\./0./'`
 fi
 sed -e "s/ dCP .*/ dCP  $CP/" \
     -e "s/ fdCP .*/ fdCP $CP/" \

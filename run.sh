@@ -4,9 +4,9 @@ bindir=`cat beam_neu_dir.txt`
 date1=`date`
 echo $date1
 
-iMH=0 # switch for MH sensitivity analysis
+iMH=1 # switch for MH sensitivity analysis
 iCP=0 # switch for CP sensitivity analysis
-ichi2_CP=1 # switch for chi2-CP plots
+ichi2_CP=0 # switch for chi2-CP plots
 ichi2_th23=0 # switch for chi2-th23 plots
 iCP_th23=0 # switch for CP-th23 plots
 iCP_th13=0 # switch for CP-th13 contour plots
@@ -51,7 +51,8 @@ if [ $iMH == 1 ]; then
     # rm -rf rslt_unit_out
 
 ### MH sensitivity study (nu vs anti-nu beam ratio)
-    run_name=T2HKK_H_MH_test
+#    run_name=T2HKK_H_MH_test
+    run_name=T2HKK_H_MH_thatm-1
 #    run_name=T2HKK_H_MH_kekcc
 #    run_name=T2HKK_H_MH_icrr_test
 #    run_name=parallel_test
@@ -71,16 +72,16 @@ if [ $iMH == 1 ]; then
 
 ## Setting parameter card
 #    params_card=params.card_new_50MeV
-#    params_card=params.card_new_50MeV_nosmear
-    params_card=params.card_new_50MeV_nosmear_nofit
+    params_card=params.card_new_50MeV_nosmear
+#    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
-    SV=122.5
-    sed -e "s/ SV .*/ SV $SV/" temp/params.card > params_card.tmp
-    mv params_card.tmp temp/params.card
+    ./set_param.sh "SV" 122.5
+    ./set_param.sh "ithatm" 1
+    ./set_param.sh "err_thatm" 0.017
 
-run_mode=1 # 0:serial run 1:parallel run
-CPscan_div=4
+    run_mode=1 # 0:serial run 1:parallel run
+    CPscan_div=8
 ## Run
    MH=1 # True mass hierarcy choice 1:NH -1:IH
    th23=0.6 # xa = -0.2
@@ -124,8 +125,8 @@ if [ $ichi2_CP == 1 ]; then
 
 #    params_card=params.card_new_50MeV
 #    params_card=params.card_new_50MeV_test
-    params_card=params.card_new_50MeV_nosmear
-#    params_card=params.card_new_50MeV_nosmear_nofit
+#    params_card=params.card_new_50MeV_nosmear
+    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
     ./set_param.sh "SV" 122.5
@@ -185,99 +186,45 @@ if [ $ichi2_th23 == 1 ]; then
     # rho_SK=2.6
     # rho_far=2.75
 
-    # exp=2
-    # L=1000
-    # OAB_SK=3.0
-    # OAB_far=0.5
-    # rho_SK=2.6
-    # rho_far=2.9
-
-    exp=3
-    L=295
+    exp=2
+    L=1090
     OAB_SK=2.5
-    OAB_far=2.5
+    OAB_far=1.3
     rho_SK=2.6
-    rho_far=2.6
+    rho_far=2.9
+
+    # exp=3
+    # L=295
+    # OAB_SK=2.5
+    # OAB_far=2.5
+    # rho_SK=2.6
+    # rho_far=2.6
 
 #    run_name=t2ko_2.5_chi2-th23_nh_50MeV_20pt
 #    run_name=t2ko_2.5_chi2-th23_ih_50MeV_20pt
 #    run_name=t2kk_2.5_chi2-th23_nh_50MeV_20pt
 #    run_name=t2kk_3.0_chi2-th23_nh_50MeV_20pt
 #    run_name=t2hk_2.5_chi2-th23_nh_50MeV_20pt
-    run_name=t2hk_2.5_chi2-th23_ih_50MeV_20pt
-    ./makedir.sh rslt_$run_name 1
+#    run_name=t2hk_2.5_chi2-th23_ih_50MeV_20pt
+    run_name=T2HKK_2.5_chi2-th23_test
+    ./makedir.sh rslt_$run_name 0
 
-    params_card=params.card_new_50MeV
+    params_card=params.card_new_50MeV_nosmear_nofit
+#    params_card=params.card_new_50MeV
     cp -rf temp/$params_card temp/params.card 
 
-    MH=-1
-    CP=0
-    sed -e "s/ dCP .*/ dCP $CP/" \
-   	-e "s/ fdCP .*/ fdCP $CP/" temp/params.card > params_card.tmp
-    mv params_card.tmp temp/params.card
-    th23=0.4
-    ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
+    ./set_param.sh "SV" 122.5
+    ./set_param.sh "ithatm" 1
+    ./set_param.sh "fthatm" 1
+    ./set_param.sh "err_thatm" 0.017
+    ./set_param.sh "dCP" 0
+    ./set_param.sh "fdCP" 0
+
+    MH=1
+    ./set_param.sh "thatm" 0.9
+    ./set_param.sh "ioct" -1
+    ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
     cp -rf run.sh rslt_$run_name/.
-    th23=0.45
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.55
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.6
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-
-    CP=90
-    sed -e "s/ dCP .*/ dCP $CP/" \
-   	-e "s/ fdCP .*/ fdCP $CP/" temp/params.card > params_card.tmp
-    mv params_card.tmp temp/params.card
-    th23=0.4
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.45
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.55
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.6
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-
-    CP=180
-    sed -e "s/ dCP .*/ dCP $CP/" \
-   	-e "s/ fdCP .*/ fdCP $CP/" temp/params.card > params_card.tmp
-    mv params_card.tmp temp/params.card
-    th23=0.4
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.45
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.55
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.6
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-
-    CP=270
-    sed -e "s/ dCP .*/ dCP $CP/" \
-   	-e "s/ fdCP .*/ fdCP $CP/" temp/params.card > params_card.tmp
-    mv params_card.tmp temp/params.card
-    th23=0.4
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.45
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.55
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 0
-   cp -rf run.sh rslt_$run_name/.
-    th23=0.6
-   ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 5 5 $CP $th23 1
-   cp -rf run.sh rslt_$run_name/.
 fi
 
 # CP-th23 plot
