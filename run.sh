@@ -4,10 +4,10 @@ bindir=`cat beam_neu_dir.txt`
 date1=`date`
 echo $date1
 
-iMH=1 # switch for MH sensitivity analysis
+iMH=0 # switch for MH sensitivity analysis
 iCP=0 # switch for CP sensitivity analysis
 ichi2_CP=0 # switch for chi2-CP plots
-ichi2_th23=0 # switch for chi2-th23 plots
+ichi2_th23=1 # switch for chi2-th23 plots
 iCP_th23=0 # switch for CP-th23 plots
 iCP_th13=0 # switch for CP-th13 contour plots
 ith23_dmatm=0 # switch for CP-th13 contour plots
@@ -207,22 +207,22 @@ if [ $ichi2_th23 == 1 ]; then
 #    run_name=t2hk_2.5_chi2-th23_nh_50MeV_20pt
 #    run_name=t2hk_2.5_chi2-th23_ih_50MeV_20pt
     run_name=T2HKK_2.5_chi2-th23_test
-    ./makedir.sh rslt_$run_name 0
+    ./makedir.sh rslt_$run_name 1
 
-    params_card=params.card_new_50MeV_nosmear_nofit
 #    params_card=params.card_new_50MeV
+    params_card=params.card_new_50MeV_nosmear
+#    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
     ./set_param.sh "SV" 122.5
     ./set_param.sh "ithatm" 1
-    ./set_param.sh "fthatm" 1
     ./set_param.sh "err_thatm" 0.017
-    ./set_param.sh "dCP" 0
-    ./set_param.sh "fdCP" 0
+    CP=0
+    ./set_param.sh "dCP" $CP
+    ./set_param.sh "fdCP" $CP
 
     MH=1
-    ./set_param.sh "thatm" 0.9
-    ./set_param.sh "ioct" -1
+    th23=0.6
     ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
     cp -rf run.sh rslt_$run_name/.
 fi

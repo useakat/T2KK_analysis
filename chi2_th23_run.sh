@@ -1,6 +1,7 @@
 #!/bin/bash
 maindir=`cat maindir.txt`
 bindir=`cat beam_neu_dir.txt`
+job_system=`cat job_system.txt`
 date1=`date`
 
 run=$1
@@ -29,12 +30,13 @@ mail=${15}
 
 min_X=0.35
 max_X=0.65
-div_X=19
-###############################################################################
+div_X=30
+#div_X=2
+##########################################################################
 outdir=${CPmode}_${fitMH}_${eexp}_${L}_${OAB_SK}_${OAB_far}_${MH}_${r_nu}_${r_anu}_${CP}_${X_input}
-makedir.sh $outdir 1
+./makedir.sh $outdir 1
 
-./chi2_scan.sh $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH $fitMH $r_nu $r_anu th23 $X_input $min_X $max_X $div_X 0
+./chi2_scan.sh $outdir $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH $fitMH $r_nu $r_anu th23 $X_input $min_X $max_X $div_X 0
 
 cp -rf rslt_unit_out/* $outdir/.
 cp -rf chi2_th23_run.sh $outdir/.
@@ -49,5 +51,5 @@ echo $date1
 echo $date2
 
 if [ $mail -eq 1 ]; then
-    bsub -q e -J chi2_th23_run -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
+    ./mail_notify $mail $job_system chi2_th23
 fi

@@ -99,11 +99,11 @@ C*************************************************
   idmatm2  2  ! 1:dm2atm = dm^2_31 2:dm2atm = dm^2_32 	
   MH  1
   s2sol_2  0.875   ! re
-  thatm 1
+  thatm    0.5          ! PDG (2013) 
   s2rct_2  0.095d0    ! re
   dm21_2   7.50d-5   ! re
   dmatm_2  2.32d-3    ! re
-  dCP      0
+  dCP 0
 C*************************************************
 C Fitting parameters
 C*************************************************
@@ -112,7 +112,7 @@ C*************************************************
   ifit_s2sol_2  1       ! 0: fixed param  1: fitting param
   ichi2_s2sol_2 1       ! 0: NOT included in chi^2 1: Included in chi^2
 
-  fthatm 1
+  fthatm        0.5   
   err_thatm 0.017
   ifit_thatm    1       
   ichi2_thatm   1       
@@ -132,7 +132,7 @@ C*************************************************
   ifit_dmatm_2  1       
   ichi2_dmatm_2 1       
 
-  fdCP          0      
+  fdCP 0
   err_dCP       180     
   ifit_dCP      1       
   ichi2_dCP     0       

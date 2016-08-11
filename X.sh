@@ -70,8 +70,25 @@ if [ $X == "th13" ];then
 	-e "s/ fs2rct_2 .*/ fs2rct_2  $XX/" \
 	-e "s/ ifit_s2rct_2 .*/ ifit_s2rct_2 0/" params.card > tmp.card
 elif [ $X == "th23" ];then
+    sed -n "/iinput/,/dCP/p" params.card > tmp2.card
+    line=`grep ithatm tmp2.card`
+    line2=${line#*ithatm}
+    line3=${line2%%\!*}
+    line4=${line3%%ioct*}
+    ioct=1
+    if [ $line4 -eq 1 ];then
+	xx_X_input=`echo "$X_input > 0.5" | bc`	
+	if [ $xx_X_input -eq 1 ];then # th23 > 0.5
+	    ioct=1
+	elif [ $xx_X_input -eq 0 ];then # th23 < 0.5
+	    ioct=-1
+	fi
+	X_input=`echo "scale=5; 4*$X_input -4*$X_input^2" | bc | sed 's/^\./0./'`
+	XX=`echo "scale=5; 4*$XX -4*$XX^2" | bc | sed 's/^\./0./'`
+    fi
     sed -e "s/ thatm .*/ thatm  $X_input/" \
 	-e "s/ fthatm .*/ fthatm  $XX/" \
+	-e "s/ ioct .*/ ioct  $ioct/" \
 	-e "s/ ifit_thatm .*/ ifit_thatm 0/" params.card > tmp.card
 elif [ $X == "CP" ];then
     sed -e "s/ dCP .*/ dCP  $X_input/" \
