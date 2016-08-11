@@ -95,7 +95,7 @@ c      ! Valid only for ithatm=1
 C*************************************************
   iinput   2  ! 1:ssol 2:s12
   ithatm   2  ! 1:thatm = s2atm^2  2:thatm = satm^2
-  ioct     -1 ! Only valid for ithatm = 1
+  ioct  -1 ! Only valid for ithatm = 1
   idmatm2  2  ! 1:dm2atm = dm^2_31 2:dm2atm = dm^2_32 	
   MH  1
   s2sol_2  0.875   ! re
