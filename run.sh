@@ -4,10 +4,10 @@ bindir=`cat beam_neu_dir.txt`
 date1=`date`
 echo $date1
 
-iMH=0 # switch for MH sensitivity analysis
+iMH=1 # switch for MH sensitivity analysis
 iCP=0 # switch for CP sensitivity analysis
 ichi2_CP=0 # switch for chi2-CP plots
-ichi2_th23=1 # switch for chi2-th23 plots
+ichi2_th23=0 # switch for chi2-th23 plots
 iCP_th23=0 # switch for CP-th23 plots
 iCP_th13=0 # switch for CP-th13 contour plots
 ith23_dmatm=0 # switch for CP-th13 contour plots
@@ -58,7 +58,7 @@ if [ $iMH == 1 ]; then
 #    run_name=parallel_test
 #    run_name=CPscan_test_div16
 #    run_name=parallel_test2
-    ./makedir.sh rslt_$run_name 0
+    ./makedir.sh rslt_$run_name 1
 
     # exp=1
     # L=653
@@ -71,27 +71,39 @@ if [ $iMH == 1 ]; then
     OAB_far=1.3
 
 ## Setting parameter card
-#    params_card=params.card_new_50MeV
-    params_card=params.card_new_50MeV_nosmear
+    params_card=params.card_new_50MeV
+#    params_card=params.card_new_50MeV_nosmear
 #    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
     ./set_param.sh "SV" 122.5
-    ./set_param.sh "ithatm" 1
-    ./set_param.sh "err_thatm" 0.017
+#    ./set_param.sh "ithatm" 1
+#    ./set_param.sh "err_thatm" 0.017
 
     run_mode=1 # 0:serial run 1:parallel run
     CPscan_div=8
 ## Run
-   MH=1 # True mass hierarcy choice 1:NH -1:IH
+    MH=1 # True mass hierarcy choice 1:NH -1:IH
    th23=0.6 # xa = -0.2
+   rm -rf par_*
+   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
+   th23=0.5 # xa = -0.2
+   rm -rf par_*
+   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+   th23=0.4 # xa = -0.2
    rm -rf par_*
    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
 
    MH=-1 # True mass hierarcy choice 1:NH -1:IH
-   # th23=0.6 # xa = -0.2
-   # rm -rf par_*
-   # ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
+   th23=0.6 # xa = -0.2
+   rm -rf par_*
+   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+   th23=0.5 # xa = -0.2
+   rm -rf par_*
+   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+   th23=0.4 # xa = -0.2
+   rm -rf par_*
+   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
 fi
 
 
@@ -121,7 +133,7 @@ if [ $ichi2_CP == 1 ]; then
     run_name=T2HKK_2.5_chi2-CP_test
 #    run_name=T2HKK_2.5_chi2-CP
 #    run_name=test
-    ./makedir.sh rslt_$run_name 0
+    ./makedir.sh rslt_$run_name 1
 
 #    params_card=params.card_new_50MeV
 #    params_card=params.card_new_50MeV_test
@@ -130,11 +142,11 @@ if [ $ichi2_CP == 1 ]; then
     cp -rf temp/$params_card temp/params.card 
 
     ./set_param.sh "SV" 122.5
-    ./set_param.sh "ithatm" 1
-    ./set_param.sh "thatm" 1
+#    ./set_param.sh "ithatm" 1
+    ./set_param.sh "thatm" 0.5
 #    ./set_param.sh "ioct" -1
-    ./set_param.sh "fthatm" 1
-    ./set_param.sh "err_thatm" 0.017
+    ./set_param.sh "fthatm" 0.5
+    ./set_param.sh "err_thatm" 0.1
 #    sed -e "s/ SV .*/ SV $SV/" temp/params.card > params_card.tmp
 #    mv params_card.tmp temp/params.card
     # ithatm=1
@@ -221,6 +233,17 @@ if [ $ichi2_th23 == 1 ]; then
     ./set_param.sh "fdCP" $CP
 
     MH=1
+    th23=0.6
+    ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
+    cp -rf run.sh rslt_$run_name/.
+    th23=0.5
+    ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
+    cp -rf run.sh rslt_$run_name/.
+    th23=0.4
+    ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 1
+    cp -rf run.sh rslt_$run_name/.
+
+    MH=-1
     th23=0.6
     ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
     cp -rf run.sh rslt_$run_name/.

@@ -51,5 +51,4 @@ echo $date2
 
 if [ $mail -eq 1 ]; then
     ./mail_notify $mail $job_system chi2_CP
-#    bsub -q e -J chi2_CP_run -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
 fi
