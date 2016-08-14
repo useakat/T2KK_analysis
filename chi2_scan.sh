@@ -95,6 +95,7 @@ while [ $icheck_X -eq 0 ];do
     echo $XX `cat par_$i/rslt_out/data/dchi2.dat` >> $outdir/$outfile
     echo $XX `cat par_$i/rslt_out/data/pulls.dat` >> $outdir/$outfile2
     echo $XX `cat par_$i/rslt_out/data/pulls_all.dat` >> $outdir/$outfile3
+#    echo $XX `cat par_$i/rslt_out/` >> $outdir/$outfile3
     i=`expr $i + 1`
     XX=`echo "scale=5; $XX + $step_X" | bc | sed 's/^\./0./'`
     icheck_X=`echo "$XX > $max_X" | bc` 
@@ -106,4 +107,4 @@ cp -rf X.sh $outdir/.
 if [ $mail -eq 1 ]; then
     ./mail_notify $mail $job_system $jobname
 fi
-rm -rf par_*
+#rm -rf par_*
