@@ -95,7 +95,7 @@ while [ $icheck_X -eq 0 ];do
     echo $XX `cat par_$i/rslt_out/data/dchi2.dat` >> $outdir/$outfile
     echo $XX `cat par_$i/rslt_out/data/pulls.dat` >> $outdir/$outfile2
     echo $XX `cat par_$i/rslt_out/data/pulls_all.dat` >> $outdir/$outfile3
-#    echo $XX `cat par_$i/rslt_out/` >> $outdir/$outfile3
+    cp -rf par_$i/rslt_out/results.log $outdir/results_$i.log
     i=`expr $i + 1`
     XX=`echo "scale=5; $XX + $step_X" | bc | sed 's/^\./0./'`
     icheck_X=`echo "$XX > $max_X" | bc` 
