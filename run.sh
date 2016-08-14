@@ -229,11 +229,13 @@ if [ $ichi2_th23 == 1 ]; then
 #    run_name=T2HKK_2.5_chi2-th23_nosmear_5-0_mu2mu_noSK_nofit_fKfit_nothatmpull
 #    run_name=T2HKK_2.5_chi2-th23_nosmear_5-0_mu2mu_noSK_nosysfit_fKfit_nothatmpull
 #    run_name=T2HKK_2.5_chi2-th23_nosmear_1-1_mu2mu_nosysfit_fKfit_nothatmpull
-    run_name=T2HKK_2.5_chi2-th23_nosmear_1-1_nosysfit_fKfit_nothatmpull
-    ./makedir.sh rslt_$run_name 1
+#    run_name=T2HKK_2.5_chi2-th23_nosmear_1-1_nosysfit_fKfit_nothatmpull
+#    run_name=T2HKK_2.5_chi2-th23_1-1_nothatmpull
+    run_name=T2HKK_2.5_chi2-th23_1-1
+    ./makedir.sh rslt_$run_name 0
 
-#    params_card=params.card_new_50MeV
-    params_card=params.card_new_50MeV_nosmear
+    params_card=params.card_new_50MeV
+#    params_card=params.card_new_50MeV_nosmear
 #    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
@@ -241,7 +243,7 @@ if [ $ichi2_th23 == 1 ]; then
     CP=0
     ./set_param.sh "dCP" $CP
     ./set_param.sh "fdCP" $CP
-    ./set_param.sh "ichi2_thatm" 0
+#    ./set_param.sh "ichi2_thatm" 0
 #    ./set_param.sh "ifit_dCP" 0
 #    ./set_param.sh "ifit_s2sol_2" 0
 #    ./set_param.sh "ifit_s2rct_2" 0
@@ -252,32 +254,23 @@ if [ $ichi2_th23 == 1 ]; then
     th23=0.6
     ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
     cp -rf run.sh rslt_$run_name/.
-    # th23=0.5
-    # ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
-    # cp -rf run.sh rslt_$run_name/.
+    th23=0.5
+    ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 1
+    cp -rf run.sh rslt_$run_name/.
+     # th23=0.4
+     # ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 1
+     # cp -rf run.sh rslt_$run_name/.
+
+    MH=-1
+    th23=0.6
+    ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
+    cp -rf run.sh rslt_$run_name/.
+    th23=0.5
+    ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
+    cp -rf run.sh rslt_$run_name/.
      th23=0.4
      ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 1
      cp -rf run.sh rslt_$run_name/.
-
-    # run_name=T2HKK_2.5_chi2-th23_nosmear_1-1_mu2mu_nosysfit_fKfit_nothatmpull
-    # ./makedir.sh rslt_$run_name 1
-    # th23=0.6
-    # ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
-    # cp -rf run.sh rslt_$run_name/.
-    # th23=0.4
-    # ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 1
-    # cp -rf run.sh rslt_$run_name/.
-
-    MH=-1
-    # th23=0.6
-    # ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
-    # cp -rf run.sh rslt_$run_name/.
-    # th23=0.5
-    # ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
-    # cp -rf run.sh rslt_$run_name/.
-    # th23=0.4
-    # ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 1
-    # cp -rf run.sh rslt_$run_name/.
 fi
 
 # CP-th23 plot
