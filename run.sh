@@ -52,7 +52,8 @@ if [ $iMH == 1 ]; then
 
 ### MH sensitivity study (nu vs anti-nu beam ratio)
 #    run_name=T2HKK_H_MH_test
-    run_name=T2HKK_3.0_H_MH_thatm-1_60
+    run_name=T2HKK_3.0_1000km_MH
+#    run_name=T2HKK_3.0_H_MH_thatm-1_60
 #    run_name=T2HKK_H_MH_kekcc
 #    run_name=T2HKK_H_MH_icrr_test
 #    run_name=parallel_test
@@ -67,8 +68,8 @@ if [ $iMH == 1 ]; then
 
     exp=2
     OAB_SK=3.0
-    L=1090
-    OAB_far=0.8
+    L=1000
+    OAB_far=0.5
 
 ## Setting parameter card
     params_card=params.card_new_50MeV
@@ -85,25 +86,25 @@ if [ $iMH == 1 ]; then
     MH=1 # True mass hierarcy choice 1:NH -1:IH
     th23=0.6 # xa = -0.2
     rm -rf par_*
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+    th23=0.5 # xa = -0.2
+    rm -rf par_*
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+    th23=0.4 # xa = -0.2
+    rm -rf par_*
     ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
-   #  th23=0.5 # xa = -0.2
-   #  rm -rf par_*
-   #  ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
-   #  th23=0.4 # xa = -0.2
-   #  rm -rf par_*
-   #  ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
     
     
-   #  MH=-1 # True mass hierarcy choice 1:NH -1:IH
-   #  th23=0.6 # xa = -0.2
-   #  rm -rf par_*
-   #  ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
-   #  th23=0.5 # xa = -0.2
-   #  rm -rf par_*
-   #  ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
-   #  th23=0.4 # xa = -0.2
-   #  rm -rf par_*
-   # ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
+    MH=-1 # True mass hierarcy choice 1:NH -1:IH
+    th23=0.6 # xa = -0.2
+    rm -rf par_*
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+    th23=0.5 # xa = -0.2
+    rm -rf par_*
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+    th23=0.4 # xa = -0.2
+    rm -rf par_*
+   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
 fi
 
 
@@ -115,8 +116,8 @@ if [ $ichi2_CP == 1 ]; then
 
     exp=2
     L=1090
-    OAB_SK=2.5
-    OAB_far=1.3
+    OAB_SK=3.0
+    OAB_far=0.8
     rho_SK=2.6
     rho_far=2.9
 
@@ -130,15 +131,16 @@ if [ $ichi2_CP == 1 ]; then
 #    run_name=t2kk_2.5_chi2-CP_nh_50MeV_40pt
 #    run_name=t2hk_2.5_chi2-CP_nh_50MeV_40pt
 #    run_name=t2kk_3.0_chi2-CP_nh_50MeV_40pt
-    run_name=T2HKK_2.5_chi2-CP_test
+#    run_name=T2HKK_2.5_chi2-CP_test
 #    run_name=T2HKK_2.5_chi2-CP
+    run_name=T2HKK_3.0_chi2-CP
 #    run_name=test
     ./makedir.sh rslt_$run_name 1
 
-#    params_card=params.card_new_50MeV
 #    params_card=params.card_new_50MeV_test
+    params_card=params.card_new_50MeV
 #    params_card=params.card_new_50MeV_nosmear
-    params_card=params.card_new_50MeV_nosmear_nofit
+#    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
     ./set_param.sh "SV" 122.5
@@ -158,31 +160,31 @@ if [ $ichi2_CP == 1 ]; then
 
     MH=1
     CP=0
+   ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
+   cp -rf run.sh rslt_$run_name/.
+    CP=90
+   ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
+   cp -rf run.sh rslt_$run_name/.
+    CP=180
+   ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
+   cp -rf run.sh rslt_$run_name/.
+    CP=270
    ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
    cp -rf run.sh rslt_$run_name/.
-   #  CP=90
-   # ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
-   # cp -rf run.sh rslt_$run_name/.
-   #  CP=180
-   # ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
-   # cp -rf run.sh rslt_$run_name/.
-   #  CP=270
-   # ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
-   # cp -rf run.sh rslt_$run_name/.
 
-   #  MH=-1
-   #  CP=0
-   # ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
-   # cp -rf run.sh rslt_$run_name/.
-   #  CP=90
-   # ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
-   # cp -rf run.sh rslt_$run_name/.
-   #  CP=180
-   # ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
-   # cp -rf run.sh rslt_$run_name/.
-   #  CP=270
-   # ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
-   # cp -rf run.sh rslt_$run_name/.
+   MH=-1
+    CP=0
+   ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
+   cp -rf run.sh rslt_$run_name/.
+    CP=90
+   ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
+   cp -rf run.sh rslt_$run_name/.
+    CP=180
+   ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
+   cp -rf run.sh rslt_$run_name/.
+    CP=270
+   ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
+   cp -rf run.sh rslt_$run_name/.
 fi
 
 # chi2-th23 plot
