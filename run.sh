@@ -4,10 +4,10 @@ bindir=`cat beam_neu_dir.txt`
 date1=`date`
 echo $date1
 
-iMH=0 # switch for MH sensitivity analysis
+iMH=1 # switch for MH sensitivity analysis
 iCP=0 # switch for CP sensitivity analysis
 ichi2_CP=0 # switch for chi2-CP plots
-ichi2_th23=1 # switch for chi2-th23 plots
+ichi2_th23=0 # switch for chi2-th23 plots
 iCP_th23=0 # switch for CP-th23 plots
 iCP_th13=0 # switch for CP-th13 contour plots
 ith23_dmatm=0 # switch for CP-th13 contour plots
@@ -52,7 +52,7 @@ if [ $iMH == 1 ]; then
 
 ### MH sensitivity study (nu vs anti-nu beam ratio)
 #    run_name=T2HKK_H_MH_test
-    run_name=T2HKK_H_MH_thatm-1
+    run_name=T2HKK_3.0_H_MH_thatm-1_60
 #    run_name=T2HKK_H_MH_kekcc
 #    run_name=T2HKK_H_MH_icrr_test
 #    run_name=parallel_test
@@ -66,9 +66,9 @@ if [ $iMH == 1 ]; then
     # OAB_far=0.9
 
     exp=2
-    OAB_SK=2.5
+    OAB_SK=3.0
     L=1090
-    OAB_far=1.3
+    OAB_far=0.8
 
 ## Setting parameter card
     params_card=params.card_new_50MeV
@@ -77,33 +77,33 @@ if [ $iMH == 1 ]; then
     cp -rf temp/$params_card temp/params.card 
 
     ./set_param.sh "SV" 122.5
-#    ./set_param.sh "ithatm" 1
-#    ./set_param.sh "err_thatm" 0.017
+    ./set_param.sh "ichi2_thatm" 0
 
     run_mode=1 # 0:serial run 1:parallel run
     CPscan_div=8
 ## Run
     MH=1 # True mass hierarcy choice 1:NH -1:IH
-   th23=0.6 # xa = -0.2
-   rm -rf par_*
-   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
-   th23=0.5 # xa = -0.2
-   rm -rf par_*
-   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
-   th23=0.4 # xa = -0.2
-   rm -rf par_*
-   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
-
-   MH=-1 # True mass hierarcy choice 1:NH -1:IH
-   th23=0.6 # xa = -0.2
-   rm -rf par_*
-   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
-   th23=0.5 # xa = -0.2
-   rm -rf par_*
-   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
-   th23=0.4 # xa = -0.2
-   rm -rf par_*
-   ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
+    th23=0.6 # xa = -0.2
+    rm -rf par_*
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
+   #  th23=0.5 # xa = -0.2
+   #  rm -rf par_*
+   #  ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+   #  th23=0.4 # xa = -0.2
+   #  rm -rf par_*
+   #  ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
+    
+    
+   #  MH=-1 # True mass hierarcy choice 1:NH -1:IH
+   #  th23=0.6 # xa = -0.2
+   #  rm -rf par_*
+   #  ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+   #  th23=0.5 # xa = -0.2
+   #  rm -rf par_*
+   #  ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 0
+   #  th23=0.4 # xa = -0.2
+   #  rm -rf par_*
+   # ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
 fi
 
 
