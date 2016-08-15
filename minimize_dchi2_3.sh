@@ -36,7 +36,6 @@ infile=params.card
 
 if [ $submit_flag -eq 1 ];then
     que=s  # e:<10min s:<3h l:<24h h:<1w
-#    work_dir=$self_dir
 fi
 
 imax=$test_CP
@@ -56,7 +55,6 @@ while [ $i -le $imax ];do
 	    ${bindir}/run.sh run 0 0 0 0
 	    cd ..
 	elif [ $run_mode -eq 1 ];then
-#	echo "ERROR: minimize_dchi2_2.sh: Sorry, parallel mode is not implemented yet..."
   	    jobname="mindchi2"$RANDOM
   	    ${maindir}/submit_job.sh $que $i $jobname "sed -e 's/ fdCP .*/ fdCP   ${dCP[$i]}/' ../$infile > $infile; \
         ${bindir}/run.sh run 0 0 0 0" $run_mode 0

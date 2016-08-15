@@ -17,11 +17,6 @@ run_mode=${10} # 0:CP serial check 1:CP parallel check (not implemented yet)
 CPscan_div=${11}
 prog_mode=${12}
 
-#cp -rf ${maindir}/temp/params.card_def.nosmear params.card
-#cp -rf ${maindir}/temp/params.card_def params.card
-#cp -rf ${maindir}/temp/params.card_oki params.card
-#cp -rf ${maindir}/temp/params.card_oki_2 params.card
-#cp -rf ${maindir}/temp/params.card_re params.card
 cp -rf ${maindir}/temp/params.card .
 if [ $MH -eq 1 ];then
     MHH="nh"
@@ -67,9 +62,6 @@ sed -e "s/ dCP .*/ dCP  $CP/" \
     -e "s/ SOAB .*/ SOAB   $OAB_SK/" tmp.card > params.card
 
 if [ $run_mode -ge 0 ];then
-#    ${maindir}/minimize_dchi2.sh out $run_mode 0
-#    run_mode=0 # Parallel run_mode is not implemented yet."
-#    ${maindir}/minimize_dchi2_2.sh out $run_mode $CP $CPscan_div 0 
     ${maindir}/minimize_dchi2_3.sh out $prog_mode $run_mode $CP $CPscan_div 0 
 elif [ $run_mode -eq -1 ];then
     ${bindir}/run.sh out 0 0 0 0

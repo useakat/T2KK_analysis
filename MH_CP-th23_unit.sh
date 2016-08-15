@@ -145,6 +145,7 @@ while [ $xx_th23 -eq 0 ];do
     while [ $xx_CP -eq 0 ];do
 	echo $CP $th23 `cat par_$i/rslt_out/data/dchi2.dat` >> $outdir/$outfile
 	cp -rf par_$i/rslt_out/CPscan.dat $outdir/CPscan_$CP.dat
+#	cp -rf par_$i/rslt_out/result.log $outdir/result_$i.log
 	i=`expr $i + 1`
 	CP=`echo "scale=5; $CP + $step_CP" | bc | sed 's/^\./0./'`
 	xx_CP=`echo "$CP > $max_CP" | bc` 
