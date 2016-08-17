@@ -5,8 +5,6 @@
 2. Install beam_neu_v1
    cd beam_neu_v1
    ./makelib.sh
-   ./set_xsec xsecCC_CCQEbased xsecNC_def
-   modify params.card properly
 
 3. modify maindir.txt and beam_neu_dir.txt properly
    maindir.txt: specify the location of this directory 
