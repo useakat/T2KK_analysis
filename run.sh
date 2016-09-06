@@ -52,7 +52,8 @@ if [ $iMH == 1 ]; then
 
 ### MH sensitivity study (nu vs anti-nu beam ratio)
 #    run_name=T2HKK_H_MH_test
-    run_name=T2HKK_2.5_2.3_1040km_MH_noSK
+#    run_name=T2HKK_2.5_2.3_1040km_MH_noSK
+    run_name=T2HKK_2.5_2.3_1040km_MH_noKr_2SV
 #    run_name=T2HKK_3.0_1000km_MH
 #    run_name=T2HKK_3.0_H_MH_thatm-1_60
 #    run_name=T2HKK_H_MH_kekcc
@@ -78,14 +79,15 @@ if [ $iMH == 1 ]; then
 #    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
-    ./set_param.sh "iSK" 0
-    ./set_param.sh "SV" 187
+    ./set_param.sh "iSK" 1
+#    ./set_param.sh "SV" 187
+    ./set_param.sh "SV" 374
     ./set_param.sh "SL" 295
     ./set_param.sh "SOAB" $OAB_SK
 
     ./set_param.sh "iOKi" 0
 
-    ./set_param.sh "iKr" 1
+    ./set_param.sh "iKr" 0
     ./set_param.sh "KV" 187
     ./set_param.sh "KL" $L
     ./set_param.sh "KOAB" $OAB_far
