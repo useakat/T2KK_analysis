@@ -158,7 +158,7 @@ cp -rf par_1/rslt_out/params.card $outdir/.
 cp -rf par_1/rslt_out/data $outdir/basic_data
 git log --oneline | head -1 | tail -1 > $outdir/program.version
 
-rm -rf par_*
+#rm -rf par_*
 
 if [ $mail -eq 1 ]; then
     ./mail_notify $mail $job_system $jobname
