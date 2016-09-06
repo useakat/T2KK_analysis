@@ -12,7 +12,7 @@ plots
 CP_true_*
 MH_CP_th23_beam-ratio_finish.*
 status
-beam_new_dir.txt
+beam_neu_dir.txt
 maindir.txt
 job_system.txt
 temp/params.card
