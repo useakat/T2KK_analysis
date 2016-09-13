@@ -1,17 +1,13 @@
 * How to Use
 
-1. In the parent directory, git clone https://github.com/useakat/beam_neu_v1
-
-2. Install beam_neu_v1
+1. install beam_neu_v1
    cd beam_neu_v1
    ./makelib.sh
-   ./set_xsec xsecCC_CCQEbased xsecNC_def
-   modify params.card properly
 
-3. modify maindir.txt and beam_neu_dir.txt properly
-   maindir.txt: specify the location of this directory 
-   beam_neu_dir.txt: specify the location of the program directory (beam_neu_v1)
-   job_system.txt: specify the job system: kekcc/icrr/none
+2. modify maindir.txt and beam_neu_dir.txt properly
+   maindir.txt: specify the location of this directory (absolute path)
+   beam_neu_dir.txt: specify the location of the beam_neu_v1 directory (absolute path) 
+   job_system.txt: specify the CP cluster job system: kekcc/icrr/none
 
 3. modify run.sh 
 
