@@ -50,27 +50,27 @@ fi
 # if [ $line4 -eq 1 ];then
 #     th23=`echo "scale=5; 4*$th23 -4*$th23^2" | bc | sed 's/^\./0./'`
 # fi
-# ./set_param.sh "dCP" $CP
-# ./set_param.sh "fdCP" $CP
-# ./set_param.sh "ifit_dCP" 1
-# ./set_param.sh "thatm" $th23
-# ./set_param.sh "fthatm" $th23
-# ./set_param.sh "r_nu" $r_nu
-# ./set_param.sh "r_anu" $r_anu
-# ./set_param.sh "MH" $MH
-# ./set_param.sh "ihypo" -1
+./set_param.sh "dCP" $CP
+./set_param.sh "fdCP" $CP
+./set_param.sh "ifit_dCP" 1
+./set_param.sh "thatm" $th23
+./set_param.sh "fthatm" $th23
+./set_param.sh "r_nu" $r_nu
+./set_param.sh "r_anu" $r_anu
+./set_param.sh "MH" $MH
+./set_param.sh "ihypo" -1
 
-sed -e "s/ dCP .*/ dCP  $CP/" \
-    -e "s/ fdCP .*/ fdCP $CP/" \
-    -e "s/ ifit_dCP .*/ ifit_dCP  1/" \
-    -e "s/ thatm .*/ thatm  $th23/" \
-    -e "s/ fthatm .*/ fthatm  $th23/" \
-    -e "s/ r_nu .*/ r_nu  $r_nu/" \
-    -e "s/ r_anu .*/ r_anu  $r_anu/" \
-    -e "s/ MH .*/ MH  $MH/" \
-    -e "s/ ihypo .*/ ihypo  -1/" params.card > tmp.card
+# sed -e "s/ dCP .*/ dCP  $CP/" \
+#     -e "s/ fdCP .*/ fdCP $CP/" \
+#     -e "s/ ifit_dCP .*/ ifit_dCP  1/" \
+#     -e "s/ thatm .*/ thatm  $th23/" \
+#     -e "s/ fthatm .*/ fthatm  $th23/" \
+#     -e "s/ r_nu .*/ r_nu  $r_nu/" \
+#     -e "s/ r_anu .*/ r_anu  $r_anu/" \
+#     -e "s/ MH .*/ MH  $MH/" \
+#     -e "s/ ihypo .*/ ihypo  -1/" params.card > tmp.card
 #    -e "s/ SOAB .*/ SOAB   $OAB_SK/" 
-mv tmp.card params.card
+#mv tmp.card params.card
 
 if [ $run_mode -ge 0 ];then
     ${maindir}/minimize_dchi2_3.sh out $prog_mode $run_mode $CP $CPscan_div 0 
