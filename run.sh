@@ -4,9 +4,9 @@ bindir=`cat beam_neu_dir.txt`
 date1=`date`
 echo $date1
 
-iMH=1 # switch for MH sensitivity analysis
-ichi2_CP=0 # switch for chi2-CP plots
-ichi2_th23=0 # switch for chi2-th23 plots
+iMH=1 # switch for generating data for a Delta chi^2_min vs. delta_CP plot
+ichi2_CP=0 # switch for generating data for a chi^2_min vs. delta_CP plot
+ichi2_th23=0 # switch for generating data for a chi^2_min vs. th23 plot
 iCP=0 # switch for CP sensitivity analysis
 iCP_th23=0 # switch for CP-th23 plots
 iCP_th13=0 # switch for CP-th13 contour plots
@@ -16,40 +16,9 @@ iCP_th13_oki=0 # switch for CP-th13 contour plots
 rm -rf temp/params.card
 mares=1100
 
-#######
-## Warning! Please check the param.card setting in X-Y.sh.
-#######
 #makedir.sh rslt_$run_name 1
 
 if [ $iMH == 1 ]; then
-### MH sensitivity study (CP vs th13)    
-    # run_name=test
-    # makedir.sh rslt_$run_name 1
-    # X=th13
-    # min_X=0.01
-    # max_X=0.15
-    # div_X=19
-    # Y=CP
-    # min_Y=-180
-    # max_Y=180
-    # div_Y=19
-    # MH=1
-    # r_nu=1
-    # r_anu=1        
-
-    # params_card=params.card_new_50MeV
-    # cp -rf temp/$params_card temp/params.card 
-    
-    # outdir=rslt_$run_name
-    # ./MH_X-Y_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $X $min_X $max_X $div_X $Y $min_Y $max_Y $div_Y 1
-    # mv rslt_unit_out/* $outdir/.
-    # rm -rf rslt_unit_out
-
-    # MH=-1
-    # ./MH_X-Y_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $X $min_X $max_X $div_X $Y $min_Y $max_Y $div_Y 1
-    # mv rslt_unit_out/* $outdir/.
-    # rm -rf rslt_unit_out
-
 ### MH sensitivity study (nu vs anti-nu beam ratio)
 #    run_name=T2HKK_H_MH_test
 #    run_name=T2HKK_2.5_2.3_1040km_MH_noSK
@@ -75,33 +44,31 @@ if [ $iMH == 1 ]; then
     OAB_far=2.3
 
 ## Setting parameter card
-#    params_card=params.card_new_50MeV
+    params_card=params.card_new_50MeV
 #    params_card=params.card_new_50MeV_nosmear
-    params_card=params.card_new_50MeV_nosmear_nofit
+#    params_card=params.card_new_50MeV_nosmear_nofit
     cp -rf temp/$params_card temp/params.card 
 
-    ./set_param.sh "iSK" 1
-#    ./set_param.sh "SV" 187
-#    ./set_param.sh "SV" 374
-    ./set_param.sh "SV" 122.5
-    ./set_param.sh "SL" 295
-    ./set_param.sh "Srho" 2.6
-    ./set_param.sh "SOAB" $OAB_SK
+    ./set_param_mode.sh 0 "iSK" 1
+    ./set_param_mode.sh 0 "SV" 122.5
+    ./set_param_mode.sh 0 "SL" 295
+    ./set_param_mode.sh 0 "Srho" 2.6
+    ./set_param_mode.sh 0 "SOAB" $OAB_SK
 
-    ./set_param.sh "iOKi" 0
-    ./set_param.sh "KV" 100
-    ./set_param.sh "OL" 695
-    ./set_param.sh "Orho" 2.75
-    ./set_param.sh "OOAB" 0.9
+    ./set_param_mode.sh 0 "iOKi" 0
+    ./set_param_mode.sh 0 "KV" 100
+    ./set_param_mode.sh 0 "OL" 695
+    ./set_param_mode.sh 0 "Orho" 2.75
+    ./set_param_mode.sh 0 "OOAB" 0.9
 
-    ./set_param.sh "iKr" 1
-    ./set_param.sh "KV" 100
-    ./set_param.sh "KL" $L
-    ./set_param.sh "Krho" 2.9
-    ./set_param.sh "KOAB" $OAB_far
+    ./set_param_mode.sh 0 "iKr" 1
+    ./set_param_mode.sh 0 "KV" 100
+    ./set_param_mode.sh 0 "KL" $L
+    ./set_param_mode.sh 0 "Krho" 2.9
+    ./set_param_mode.sh 0 "KOAB" $OAB_far
 
-    ./set_param.sh "Y" 5
-    ./set_param.sh "ichi2_thatm" 0
+    ./set_param_mode.sh 0 "Y" 5
+    ./set_param_mode.sh 0 "ichi2_thatm" 0
 
     run_mode=1 # 0:serial run 1:parallel run
     CPscan_div=8

@@ -1,14 +1,14 @@
+This program is developed for T2KK/T2KO analysis and use beam_neu_v1 program
+to calculate chi^2 minimum.
+
 * How to Use
 
-1. install beam_neu_v1
-   cd beam_neu_v1
-   ./makelib.sh
+1. Installation
+   ./install.sh
 
-2. modify maindir.txt and beam_neu_dir.txt properly
-   maindir.txt: specify the location of this directory (absolute path)
-   beam_neu_dir.txt: specify the location of the beam_neu_v1 directory (absolute path) 
-   job_system.txt: specify the CP cluster job system: kekcc/icrr/none
+2. Modify job_system.txt if you use KEKCC or ICRR cluster: kekcc/icrr/none
+   (The default value is "none".)
 
-3. modify run.sh 
+3. Modify run.sh 
 
 4. ./run.sh
