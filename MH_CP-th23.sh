@@ -50,15 +50,16 @@ fi
 # if [ $line4 -eq 1 ];then
 #     th23=`echo "scale=5; 4*$th23 -4*$th23^2" | bc | sed 's/^\./0./'`
 # fi
-./set_param.sh "dCP" $CP
-./set_param.sh "fdCP" $CP
-./set_param.sh "ifit_dCP" 1
-./set_param.sh "thatm" $th23
-./set_param.sh "fthatm" $th23
-./set_param.sh "r_nu" $r_nu
-./set_param.sh "r_anu" $r_anu
-./set_param.sh "MH" $MH
-./set_param.sh "ihypo" -1
+
+${maindir}/set_param_mode.sh 1 "dCP" $CP
+${maindir}/set_param_mode.sh 1 "fdCP" $CP
+${maindir}/set_param_mode.sh 1 "ifit_dCP" 1
+${maindir}/set_param_mode.sh 1 "thatm" $th23
+${maindir}/set_param_mode.sh 1 "fthatm" $th23
+${maindir}/set_param_mode.sh 1 "r_nu" $r_nu
+${maindir}/set_param_mode.sh 1 "r_anu" $r_anu
+${maindir}/set_param_mode.sh 1 "MH" $MH
+${maindir}/set_param_mode.sh 1 "ihypo" -1
 
 # sed -e "s/ dCP .*/ dCP  $CP/" \
 #     -e "s/ fdCP .*/ fdCP $CP/" \
