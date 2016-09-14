@@ -12,6 +12,7 @@ if [ $mail -eq 1 ];then
 #	pjsub -m e --mail-list useakat@gmail.com -N ${job_name}_finish -j nulljob.sh >/dev/null 2>&1
 	pjsub -m e --mail-list useakat@gmail.com -N ${job_name}_finish -j ./nulljob.sh
     else
-	"ERROR: mail_notify: job mail cannot be send on this system."
+	echo ""
+	echo "mail_notify: Alert mail after finishing jobs cannot be sent on this system."
     fi
 fi
