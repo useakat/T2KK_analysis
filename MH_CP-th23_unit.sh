@@ -27,14 +27,14 @@ if [ $job_system == "icrr" ];then
 	rm -rf $work_dir
     fi
     mkdir $work_dir
-elif [ $job_system == "kekcc" ];then
+else    
     work_dir=./
 fi
 
 min_CP=-180
 max_CP=180
-div_CP=20
-#div_CP=1
+#div_CP=20
+div_CP=1
 
 div_th23=1
 ######################## Parameter check #################################

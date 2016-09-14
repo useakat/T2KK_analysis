@@ -44,9 +44,9 @@ if [ $iMH == 1 ]; then
     OAB_far=2.3
 
 ## Setting parameter card
-    params_card=params.card_new_50MeV
-#    params_card=params.card_new_50MeV_nosmear
-#    params_card=params.card_new_50MeV_nosmear_nofit
+#    params_card=params.card_new_50MeV  # default template of parameter card 
+#    params_card=params.card_new_50MeV_nosmear  # template of parameter card for analysis without detector smearing (for test)
+    params_card=params.card_new_50MeV_nosmear_nofit   #  template of parameter card for analysis without detector smearing and parameter fitting (for test)
     cp -rf temp/$params_card temp/params.card 
 
     ./set_param_mode.sh 0 "iSK" 1
@@ -70,7 +70,7 @@ if [ $iMH == 1 ]; then
     ./set_param_mode.sh 0 "Y" 5
     ./set_param_mode.sh 0 "ichi2_thatm" 0
 
-    run_mode=1 # 0:serial run 1:parallel run
+    run_mode=0 # 0:serial run 1:parallel run
     CPscan_div=8
 ## Run
     MH=1 # True mass hierarcy choice 1:NH -1:IH
