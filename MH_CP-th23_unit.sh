@@ -33,8 +33,8 @@ fi
 
 min_CP=-180
 max_CP=180
-#div_CP=20
-div_CP=1
+div_CP=20
+#div_CP=1
 
 div_th23=1
 ######################## Parameter check #################################
