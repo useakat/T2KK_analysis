@@ -17,12 +17,12 @@ OAB_far=2.3
 rho_SK=2.6
 rho_far=2.9
 
-run_name=T2HKK_2.5_2.3_1040km_chi2-CP
+run_name=T2HKK_C_chi2-CP_2.7
 ./makedir.sh rslt_$run_name 1
 
-#    params_card=params.card_new_50MeV
-params_card=params.card_new_50MeV_nosmear
-#    params_card=params.card_new_50MeV_nosmear_nofit
+    params_card=params.card_2016.09
+#params_card=params.card_2016.09_nosmear
+#    params_card=params.card_2016.09_nosmear_nofit
 cp -rf temp/$params_card temp/params.card 
 
 ./set_param_mode.sh 0 "iSK" 1
@@ -43,11 +43,11 @@ cp -rf temp/$params_card temp/params.card
 ./set_param_mode.sh 0 "Krho" 2.9
 ./set_param_mode.sh 0 "KOAB" $OAB_far
 
-./set_param_mode.sh 0 "Y" 1
+./set_param_mode.sh 0 "Y" 2.7
 
 ./set_param.sh "thatm" 0.5
 ./set_param.sh "fthatm" 0.5
-./set_param.sh "err_thatm" 0.1
+./set_param.sh "err_thatm" 0.05
 
 MH=1
 CP=0
@@ -76,8 +76,6 @@ cp -rf run.sh rslt_$run_name/.
 CP=270
 ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
 cp -rf run.sh rslt_$run_name/.
-
-fi
 
 xsecCC_dir=`cat $bindir/xsecCC/xsecCC_dir.txt`
 xsecNC_dir=`cat $bindir/xsecNC/xsecNC_dir.txt`

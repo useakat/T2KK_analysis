@@ -18,12 +18,12 @@ OAB_far=2.3
 rho_SK=2.6
 rho_far=2.9
 
-run_name=T2HKK_2.5_2.3_1040km_chi2-th23
+run_name=T2HKK_C_chi2-th23_2.7
 ./makedir.sh rslt_$run_name 1
 
-#params_card=params.card_new_50MeV
-params_card=params.card_new_50MeV_nosmear
-#    params_card=params.card_new_50MeV_nosmear_nofit
+params_card=params.card_2016.09
+#params_card=params.card_2016.09_nosmear
+#    params_card=params.card_2016.09_nosmear_nofit
 cp -rf temp/$params_card temp/params.card 
 
 ./set_param_mode.sh 0 "iSK" 1
@@ -44,21 +44,13 @@ cp -rf temp/$params_card temp/params.card
 ./set_param_mode.sh 0 "Krho" 2.9
 ./set_param_mode.sh 0 "KOAB" $OAB_far
 
-./set_param_mode.sh 0 "Y" 5
-
-    # ./set_param.sh "thatm" 0.5
-    # ./set_param.sh "fthatm" 0.5
-    # ./set_param.sh "err_thatm" 0.1
+./set_param_mode.sh 0 "Y" 2.7
 
 CP=0
 ./set_param.sh "dCP" $CP
 ./set_param.sh "fdCP" $CP
-#    ./set_param.sh "ichi2_thatm" 0
-#    ./set_param.sh "ifit_dCP" 0
-#    ./set_param.sh "ifit_s2sol_2" 0
-#    ./set_param.sh "ifit_s2rct_2" 0
-#    ./set_param.sh "ifit_dm21_2" 0
-#    ./set_param.sh "ifit_dmatm_2" 0
+
+./set_param.sh "ichi2_thatm" 1
 
 MH=1
 th23=0.6
@@ -81,8 +73,6 @@ cp -rf run.sh rslt_$run_name/.
 th23=0.4
 ./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 1
 cp -rf run.sh rslt_$run_name/.
-
-fi
 
 xsecCC_dir=`cat $bindir/xsecCC/xsecCC_dir.txt`
 xsecNC_dir=`cat $bindir/xsecNC/xsecNC_dir.txt`

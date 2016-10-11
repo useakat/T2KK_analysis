@@ -8,7 +8,7 @@ rm -rf temp/params.card
 mares=1100
 
 ### MH sensitivity study (nu vs anti-nu beam ratio)
-run_name=T2HKK_C_MH
+run_name=T2HKK_C_MH_2.7
 ./makedir.sh rslt_$run_name 1
 
 exp=2
@@ -19,9 +19,9 @@ OAB_far=2.3 # C
 #    OAB_far=1.3 # H
 
 ## Setting parameter card
-#    params_card=params.card_new_50MeV  # default template of parameter card 
-params_card=params.card_new_50MeV_nosmear  # template of parameter card for analysis without detector smearing (for test)
-#    params_card=params.card_new_50MeV_nosmear_nofit   #  template of parameter card for analysis without detector smearing and parameter fitting (for test)
+    params_card=params.card_2016.09  # default template of parameter card 
+#params_card=params.card_2016.09_nosmear  # template of parameter card for analysis without detector smearing (for test)
+#    params_card=params.card_2016.09_nosmear_nofit   #  template of parameter card for analysis without detector smearing and parameter fitting (for test)
 cp -rf temp/$params_card temp/params.card 
 
 ./set_param_mode.sh 0 "iSK" 1
@@ -42,7 +42,7 @@ cp -rf temp/$params_card temp/params.card
 ./set_param_mode.sh 0 "Krho" 2.9
 ./set_param_mode.sh 0 "KOAB" $OAB_far
 
-./set_param_mode.sh 0 "Y" 1
+./set_param_mode.sh 0 "Y" 2.7
 ./set_param_mode.sh 0 "ichi2_thatm" 0
 
 run_mode=1 # 0:serial run 1:parallel run
@@ -70,8 +70,6 @@ rm -rf par_*
 th23=0.4 # xa = -0.2
 rm -rf par_*
 ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 $run_mode $CPscan_div 1
-
-fi
 
 xsecCC_dir=`cat $bindir/xsecCC/xsecCC_dir.txt`
 xsecNC_dir=`cat $bindir/xsecNC/xsecNC_dir.txt`
