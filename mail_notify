@@ -7,7 +7,7 @@ job_name=$3
 if [ $mail -eq 1 ];then
     if [ $job_system == "kekcc" ];then
 #	bsub -q e -J cbscan -u takaesu@post.kek.jp ./nulljob.sh >/dev/null 2>&1
-	bsub -q e -J cbscan -u takaesu@post.kek.jp ./nulljob.sh
+	bsub -q s -J cbscan -u takaesu@post.kek.jp ./nulljob.sh
     elif [ $job_system == "icrr" ];then
 #	pjsub -m e --mail-list useakat@gmail.com -N ${job_name}_finish -j nulljob.sh >/dev/null 2>&1
 	pjsub -m e --mail-list useakat@gmail.com -N ${job_name}_finish -j ./nulljob.sh
