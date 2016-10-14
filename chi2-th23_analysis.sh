@@ -4,6 +4,15 @@ bindir=`cat beam_neu_dir.txt`
 date1=`date`
 echo $date1
 
+run_name=$1
+iKr=$2
+KL=$3 # km
+OAB_Kr=$4 # degree
+rho_Kr=$5  # g/cm^3
+FV_HK=$6 # kton
+FV_Kr=$7 # kton
+POT=$8 # * 10^21 POT
+
 rm -rf temp/params.card
 mares=1100
 
@@ -12,24 +21,23 @@ CPmode=CP
 fitMH=true
 
 exp=2
-L=1040
 OAB_SK=2.5
-OAB_far=2.3
 rho_SK=2.6
-rho_far=2.9
+SL=295
 
-run_name=T2HKK_C_chi2-th23_2.7
 ./makedir.sh rslt_$run_name 1
 
 params_card=params.card_2016.09
 #params_card=params.card_2016.09_nosmear
-#    params_card=params.card_2016.09_nosmear_nofit
+#params_card=params.card_2016.09_nosmear_nofit
 cp -rf temp/$params_card temp/params.card 
 
+SV=`echo "scale=3; $FV_HK + 22.5" | bc`
+
 ./set_param_mode.sh 0 "iSK" 1
-./set_param_mode.sh 0 "SV" 122.5
-./set_param_mode.sh 0 "SL" 295
-./set_param_mode.sh 0 "Srho" 2.6
+./set_param_mode.sh 0 "SV" $SV
+./set_param_mode.sh 0 "SL" $SL
+./set_param_mode.sh 0 "Srho" $rho_SK
 ./set_param_mode.sh 0 "SOAB" $OAB_SK
 
 ./set_param_mode.sh 0 "iOKi" 0
@@ -38,13 +46,13 @@ cp -rf temp/$params_card temp/params.card
 ./set_param_mode.sh 0 "Orho" 2.75
 ./set_param_mode.sh 0 "OOAB" 0.9
 
-./set_param_mode.sh 0 "iKr" 1
-./set_param_mode.sh 0 "KV" 100
-./set_param_mode.sh 0 "KL" $L
-./set_param_mode.sh 0 "Krho" 2.9
-./set_param_mode.sh 0 "KOAB" $OAB_far
+./set_param_mode.sh 0 "iKr" $iKr
+./set_param_mode.sh 0 "KV" $FV_Kr
+./set_param_mode.sh 0 "KL" $KL
+./set_param_mode.sh 0 "Krho" $rho_Kr
+./set_param_mode.sh 0 "KOAB" $OAB_Kr
 
-./set_param_mode.sh 0 "Y" 2.7
+./set_param_mode.sh 0 "Y" $POT
 
 CP=0
 ./set_param.sh "dCP" $CP
@@ -54,24 +62,46 @@ CP=0
 
 MH=1
 th23=0.6
-./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 0
 cp -rf run.sh rslt_$run_name/.
 th23=0.5
-./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 0
 cp -rf run.sh rslt_$run_name/.
 th23=0.4
-./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 1
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 0
+cp -rf run.sh rslt_$run_name/.
+th23=0.55
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 0
+cp -rf run.sh rslt_$run_name/.
+th23=0.45
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 1
 cp -rf run.sh rslt_$run_name/.
 
 MH=-1
 th23=0.6
-./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 0
 cp -rf run.sh rslt_$run_name/.
 th23=0.5
-./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 0
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 0
 cp -rf run.sh rslt_$run_name/.
 th23=0.4
-./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP $th23 1
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 0
+cp -rf run.sh rslt_$run_name/.
+th23=0.55
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 0
+cp -rf run.sh rslt_$run_name/.
+th23=0.45
+rm -rf par_*
+./chi2_th23_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP $th23 1
 cp -rf run.sh rslt_$run_name/.
 
 xsecCC_dir=`cat $bindir/xsecCC/xsecCC_dir.txt`
