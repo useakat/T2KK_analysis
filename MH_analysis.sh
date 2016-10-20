@@ -13,9 +13,6 @@ FV_HK=$6 # kton
 FV_Kr=$7 # kton
 POT=$8 # * 10^21 POT
 
-rm -rf temp/params.card
-mares=1100
-
 ### MH sensitivity study (nu vs anti-nu beam ratio)
 ./makedir.sh rslt_$run_name 1
 
@@ -23,17 +20,6 @@ exp=2
 OAB_SK=2.5
 rho_SK=2.6
 SL=295
-#L=1040 # C
-#    L=1090 # H
-#OAB_far=2.3 # C
-#    OAB_far=1.3 # H
-
-## Setting parameter card
-params_card=params.card_2016.09  # default template of parameter card 
-#params_card=params.card_2016.09_nosmear  # template of parameter card for analysis without detector smearing (for test)
-#params_card=params.card_2016.09_nosmear_nofit   #  template of parameter card for analysis without detector smearing and parameter fitting (for test)
-#params_card=params.card_new_50MeV  # template of parameter card for T2KK/T2KO study (1605.02368)
-cp -rf temp/$params_card temp/params.card 
 
 SV=`echo "scale=3; $FV_HK + 22.5" | bc`
 

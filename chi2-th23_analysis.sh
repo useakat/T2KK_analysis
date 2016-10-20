@@ -13,8 +13,7 @@ FV_HK=$6 # kton
 FV_Kr=$7 # kton
 POT=$8 # * 10^21 POT
 
-rm -rf temp/params.card
-mares=1100
+#mares=1100
 
 # Please set the 4th argument of minimize_dchi2_2.sh to 4 (in X.sh)
 CPmode=CP
@@ -26,11 +25,6 @@ rho_SK=2.6
 SL=295
 
 ./makedir.sh rslt_$run_name 1
-
-params_card=params.card_2016.09
-#params_card=params.card_2016.09_nosmear
-#params_card=params.card_2016.09_nosmear_nofit
-cp -rf temp/$params_card temp/params.card 
 
 SV=`echo "scale=3; $FV_HK + 22.5" | bc`
 

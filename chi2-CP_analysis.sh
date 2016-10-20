@@ -61,29 +61,29 @@ MH=1
 CP=0
 ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
 cp -rf run.sh rslt_$run_name/.
-# CP=90
-# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-# cp -rf run.sh rslt_$run_name/.
-# CP=180
-# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-# cp -rf run.sh rslt_$run_name/.
-# CP=270
-# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 1
-# cp -rf run.sh rslt_$run_name/.
+CP=90
+./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+cp -rf run.sh rslt_$run_name/.
+CP=180
+./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+cp -rf run.sh rslt_$run_name/.
+CP=270
+./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 1
+cp -rf run.sh rslt_$run_name/.
 
-# MH=-1
-# CP=0
-# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-# cp -rf run.sh rslt_$run_name/.
-# CP=90
-# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-# cp -rf run.sh rslt_$run_name/.
-# CP=180
-# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-# cp -rf run.sh rslt_$run_name/.
-# CP=270
-# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 1
-# cp -rf run.sh rslt_$run_name/.
+MH=-1
+CP=0
+./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+cp -rf run.sh rslt_$run_name/.
+CP=90
+./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+cp -rf run.sh rslt_$run_name/.
+CP=180
+./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+cp -rf run.sh rslt_$run_name/.
+CP=270
+./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 1
+cp -rf run.sh rslt_$run_name/.
 
 xsecCC_dir=`cat $bindir/xsecCC/xsecCC_dir.txt`
 xsecNC_dir=`cat $bindir/xsecNC/xsecNC_dir.txt`
