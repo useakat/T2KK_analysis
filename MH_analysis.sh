@@ -32,6 +32,7 @@ SL=295
 params_card=params.card_2016.09  # default template of parameter card 
 #params_card=params.card_2016.09_nosmear  # template of parameter card for analysis without detector smearing (for test)
 #params_card=params.card_2016.09_nosmear_nofit   #  template of parameter card for analysis without detector smearing and parameter fitting (for test)
+#params_card=params.card_new_50MeV  # template of parameter card for T2KK/T2KO study (1605.02368)
 cp -rf temp/$params_card temp/params.card 
 
 SV=`echo "scale=3; $FV_HK + 22.5" | bc`
