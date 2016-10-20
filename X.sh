@@ -39,31 +39,31 @@ sed -e "s/ MH .*/ MH  $MH/" \
     -e "s/iSK .*/iSK   1/" \
     -e "s/ Srho .*/ Srho  $rho_SK/" \
     -e "s/ SOAB .*/ SOAB   $OAB_SK/" params.card > tmp.card
-if [ $iDD -eq 1 ];then # T2KO
-    sed	-e "s/iOki .*/iOki  1/" \
-	-e "s/ Orho .*/ Orho  $rho_far/" \
-	-e "s/ OL .*/ OL  $L/" \
-	-e "s/ OOAB .*/ OOAB   $OAB_far/" \
-	-e "s/iKr .*/iKr   0/" tmp.card > params.card
-elif [ $iDD -eq 2 ];then # T2KK
-    sed -e "s/iOki .*/iOki  0/" \
-	-e "s/ Krho .*/ Krho  $rho_far/" \
-	-e "s/ KL .*/ KL  $L/" \
-	-e "s/ KOAB .*/ KOAB   $OAB_far/" \
-	-e "s/iKr .*/iKr   1/" tmp.card > params.card
-elif [ $iDD -eq 3 ];then # T2HK (HK = 100kton +SK)
-  sed -e "s/iOki .*/iOki  1/" \
-	-e "s/ Orho .*/Orho  $rho_far/" \
-	-e "s/ OL .*/ OL  $L/" \
-	-e "s/ OOAB .*/ OOAB   $OAB_far/" \
-	-e "s/iKr .*/iKr   0/" tmp.card > params.card
-#	-e "s/ Oemax .*/Oemax  1.2/" \
+# if [ $iDD -eq 1 ];then # T2KO
+#     sed	-e "s/iOki .*/iOki  1/" \
+# 	-e "s/ Orho .*/ Orho  $rho_far/" \
+# 	-e "s/ OL .*/ OL  $L/" \
+# 	-e "s/ OOAB .*/ OOAB   $OAB_far/" \
+# 	-e "s/iKr .*/iKr   0/" tmp.card > params.card
+# elif [ $iDD -eq 2 ];then # T2KK
+#     sed -e "s/iOki .*/iOki  0/" \
+# 	-e "s/ Krho .*/ Krho  $rho_far/" \
+# 	-e "s/ KL .*/ KL  $L/" \
+# 	-e "s/ KOAB .*/ KOAB   $OAB_far/" \
+# 	-e "s/iKr .*/iKr   1/" tmp.card > params.card
+# elif [ $iDD -eq 3 ];then # T2HK (HK = 100kton +SK)
+#   sed -e "s/iOki .*/iOki  1/" \
+# 	-e "s/ Orho .*/Orho  $rho_far/" \
+# 	-e "s/ OL .*/ OL  $L/" \
+# 	-e "s/ OOAB .*/ OOAB   $OAB_far/" \
+# 	-e "s/iKr .*/iKr   0/" tmp.card > params.card
+# 	-e "s/ Oemax .*/Oemax  1.2/" \
 # elif [ $iDD -eq 3 ];then # T2HK (HK = 122.5kton SK)
 #     sed	-e "s/iOki .*/iOki  0/" \
 # 	-e "s/ SV .*/ SV  122.5/" \
 # 	-e "s/ SL .*/ SL  $L/" \
 # 	-e "s/iKr .*/iKr   0/" tmp.card > params.card
-fi
+# fi
 
 if [ $X == "th13" ];then
     sed -e "s/ s2rct_2 .*/ s2rct_2  $X_input/" \

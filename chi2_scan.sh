@@ -21,7 +21,7 @@ div_X=${16}
 mail=${17}
 ######################  Parameters ######################################
 que=s  # e:<10min s:<3h l:<24h h:<1w
-scan_mode=1 # 0:serial X-Y scan 1:parallel X-Y scan
+scan_mode=0 # 0:serial X-Y scan 1:parallel X-Y scan
 ######################## Parameter check ################################
 icheck=`echo "$div_X <= 0" | bc`
 if [ $icheck -eq 1 ];then

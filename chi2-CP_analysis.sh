@@ -15,8 +15,7 @@ FV_HK=$6 # kton
 FV_Kr=$7 # kton
 POT=$8 # * 10^21 POT
 
-rm -rf temp/params.card
-mares=1100
+#mares=1100
 
 CPmode=CP
 fitMH=true
@@ -31,11 +30,6 @@ SL=295
 
 #run_name=T2HKK_C_chi2-CP_2.7_187
 ./makedir.sh rslt_$run_name 1
-
-params_card=params.card_2016.09
-#params_card=params.card_2016.09_nosmear
-#params_card=params.card_2016.09_nosmear_nofit
-cp -rf temp/$params_card temp/params.card 
 
 SV=`echo "scale=3; $FV_HK + 22.5" | bc`
 
@@ -67,29 +61,29 @@ MH=1
 CP=0
 ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
 cp -rf run.sh rslt_$run_name/.
-CP=90
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-cp -rf run.sh rslt_$run_name/.
-CP=180
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-cp -rf run.sh rslt_$run_name/.
-CP=270
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 1
-cp -rf run.sh rslt_$run_name/.
+# CP=90
+# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+# cp -rf run.sh rslt_$run_name/.
+# CP=180
+# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+# cp -rf run.sh rslt_$run_name/.
+# CP=270
+# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 1
+# cp -rf run.sh rslt_$run_name/.
 
-MH=-1
-CP=0
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-cp -rf run.sh rslt_$run_name/.
-CP=90
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-cp -rf run.sh rslt_$run_name/.
-CP=180
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
-cp -rf run.sh rslt_$run_name/.
-CP=270
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 1
-cp -rf run.sh rslt_$run_name/.
+# MH=-1
+# CP=0
+# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+# cp -rf run.sh rslt_$run_name/.
+# CP=90
+# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+# cp -rf run.sh rslt_$run_name/.
+# CP=180
+# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 0
+# cp -rf run.sh rslt_$run_name/.
+# CP=270
+# ./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $KL $OAB_SK $OAB_Kr $rho_SK $rho_Kr $MH 1 1 $CP 1
+# cp -rf run.sh rslt_$run_name/.
 
 xsecCC_dir=`cat $bindir/xsecCC/xsecCC_dir.txt`
 xsecNC_dir=`cat $bindir/xsecNC/xsecNC_dir.txt`
