@@ -15,12 +15,12 @@ FV_Kr=187
 dir=rslt_T2HKK_C_${FV_Kr}kt_${POT}POT
 ./makedir.sh $dir 1
 
-# ./MH_analysis.sh T2HKK_C_MH_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
-# mv rslt_T2HKK_C_MH_${FV_Kr}kt_${POT}POT $dir/MH
-# ./chi2-CP_analysis.sh T2HKK_C_chi2-CP_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
-# mv rslt_T2HKK_C_chi2-CP_${FV_Kr}kt_${POT}POT $dir/chi2-CP
-# ./chi2-th23_analysis.sh T2HKK_C_chi2-th23_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
-# mv rslt_T2HKK_C_chi2-th23_${FV_Kr}kt_${POT}POT $dir/chi2-th23
+./MH_analysis.sh T2HKK_C_MH_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
+mv rslt_T2HKK_C_MH_${FV_Kr}kt_${POT}POT $dir/MH
+./chi2-CP_analysis.sh T2HKK_C_chi2-CP_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
+mv rslt_T2HKK_C_chi2-CP_${FV_Kr}kt_${POT}POT $dir/chi2-CP
+./chi2-th23_analysis.sh T2HKK_C_chi2-th23_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
+mv rslt_T2HKK_C_chi2-th23_${FV_Kr}kt_${POT}POT $dir/chi2-th23
 
 ####### site H
 #POT=2.7 # * 10^21
@@ -34,12 +34,12 @@ FV_Kr=187
 dir=rslt_T2HKK_H_${FV_Kr}kt_${POT}POT
 ./makedir.sh $dir 1
 
-# ./MH_analysis.sh T2HKK_H_MH_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
-# mv rslt_T2HKK_H_MH_${FV_Kr}kt_${POT}POT $dir/MH
-# ./chi2-CP_analysis.sh T2HKK_H_chi2-CP_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
-# mv rslt_T2HKK_H_chi2-CP_${FV_Kr}kt_${POT}POT $dir/chi2-CP
-# ./chi2-th23_analysis.sh T2HKK_H_chi2-th23_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
-# mv rslt_T2HKK_H_chi2-th23_${FV_Kr}kt_${POT}POT $dir/chi2-th23
+./MH_analysis.sh T2HKK_H_MH_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
+mv rslt_T2HKK_H_MH_${FV_Kr}kt_${POT}POT $dir/MH
+./chi2-CP_analysis.sh T2HKK_H_chi2-CP_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
+mv rslt_T2HKK_H_chi2-CP_${FV_Kr}kt_${POT}POT $dir/chi2-CP
+./chi2-th23_analysis.sh T2HKK_H_chi2-th23_${FV_Kr}kt_${POT}POT $iKr $KL $OAB_Kr $rho_Kr $FV_HK $FV_Kr $POT
+mv rslt_T2HKK_H_chi2-th23_${FV_Kr}kt_${POT}POT $dir/chi2-th23
 
 ####### HK*2
 iKr=0
