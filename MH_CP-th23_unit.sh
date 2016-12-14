@@ -156,7 +156,8 @@ while [ $xx_th23 -eq 0 ];do
 done
 cp -rf par_1/rslt_out/params.card $outdir/.
 cp -rf par_1/rslt_out/data $outdir/basic_data
-git log --oneline | head -1 | tail -1 > $outdir/program.version
+echo $maindir > $outdir/program.version
+git log --oneline | head -1 | tail -1 >> $outdir/program.version
 
 rm -rf par_*
 
