@@ -4,6 +4,10 @@
 ###   nu-anti-nu beam ratio for an experiment (T2KK/T2KO). 
 ################################################################################
 function MH_analysis () {
+    rm -rf temp/params.card
+    cp -rf temp/$params_card temp/params.card 
+    ./set_param.sh "ichi2_thatm" 0   # for simple calculation of Delta chi^2_MH
+
     run_name=${exp_name}_MH_${OAB_SK}_${OAB_far}_${L}km_$ext
     ./makedir.sh rslt_$run_name 1
 
@@ -31,11 +35,7 @@ params_card=$2
 run_mode=$3
 CPscan_div=$4
 
-rm -rf temp/params.card
-cp -rf temp/$params_card temp/params.card 
 th23=0.5
-./set_param.sh "ichi2_thatm" 0   # for simple calculation of Delta chi^2_MH
-
 
 ### T2KK 
 exp=2
