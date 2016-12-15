@@ -1,0 +1,3 @@
+[submodule "beam_neu_v1"]
+	path = beam_neu_v1
+	url = https://github.com/useakat/beam_neu_v1
