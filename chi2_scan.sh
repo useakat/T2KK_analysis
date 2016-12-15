@@ -107,4 +107,5 @@ cp -rf X.sh $outdir/.
 if [ $mail -eq 1 ]; then
     ./mail_notify $mail $job_system $jobname
 fi
-#rm -rf par_*
+
+rm -rf par_*
