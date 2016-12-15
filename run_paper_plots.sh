@@ -4,8 +4,8 @@ date1=`date`
 echo $date1
 
 ext=referee-chi2_test
-params_card=params.card_new_50MeV
-#params_card=params.card_new_50MeV_nosmear
+#params_card=params.card_new_50MeV
+params_card=params.card_new_50MeV_nosmear
 #params_card=params.card_new_50MeV_nosmear_nofit
 run_mode=1 # 0:serial run 1:parallel run
 CPscan_div=8

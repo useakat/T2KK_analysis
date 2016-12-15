@@ -72,7 +72,6 @@ r_anu=5
 ./MH_CP-th23_unit.sh $outdir $exp $L $OAB_SK $OAB_far $MH $th23min $th23max $r_nu $r_anu $mares $submit_mode $CPscan_div 0
 mv rslt_unit_out/* $outdir/.
 
-
 # mares=1210
 # ./set_mares.sh $mares
 # ./MH_CP-th23_unit.sh $exp $L $OAB_SK $OAB_far $MH $r_nu $r_anu $mares $job_system $submit_mode 0
@@ -96,6 +95,9 @@ if [ -e rslt_$run/$outdir ]; then
 else
     mv $outdir rslt_$run/.
 fi
+
+cp -rf gnuplot/mh_cp_ratio_all_tex.gnu rslt_$run/.
+cp -rf gnuplot_tex.sh rslt_$run/.
 
 rm -rf rslt_unit_out
 
