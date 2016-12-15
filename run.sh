@@ -4,7 +4,7 @@ bindir=`cat beam_neu_dir.txt`
 date1=`date`
 echo $date1
 
-iMH=1 # switch for MH sensitivity analysis
+iMH=0 # switch for MH sensitivity analysis
 iCP=0 # switch for CP sensitivity analysis
 ichi2_CP=0 # switch for chi2-CP plots
 ichi2_th23=0 # switch for chi2-th23 plots
