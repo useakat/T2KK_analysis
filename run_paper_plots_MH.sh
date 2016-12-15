@@ -9,12 +9,12 @@ function MH_analysis () {
 
     MH=1 # True mass hierarcy choice 1:NH -1:IH
     rm -rf par_*
-    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 \
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 1 \
 	$run_mode $CPscan_div 0
     
     MH=-1 # True mass hierarcy choice 1:NH -1:IH
     rm -rf par_*
-    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 0 \
+    ./MH_CP_th23_beam-ratio.sh $run_name $exp $L $OAB_SK $OAB_far $MH $th23 1 \
 	$run_mode $CPscan_div 1
 }
 
