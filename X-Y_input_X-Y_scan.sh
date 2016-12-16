@@ -1,28 +1,30 @@
 #!/bin/bash
 maindir=`cat maindir.txt`
+job_system=`cat job_system.txt`
 
-iDD=$1 # 1:T2KO 2:T2KK
-L=$2
-OAB_SK=$3
-OAB_far=$4
-rho_SK=$5
-rho_far=$6
-MH=$7
-fitMH=$8
-r_nu=$9
-r_anu=${10}
-mares=${11}
-X=${12}
-X_input=${13}
-min_X=${14}
-max_X=${15}
-div_X=${16}
-Y=${17}
-Y_input=${18}
-min_Y=${19}
-max_Y=${20}
-div_Y=${21}
-mail=${22}
+rundir=$1
+iDD=$2 # 1:T2KO 2:T2KK
+L=$3
+OAB_SK=$4
+OAB_far=$5
+rho_SK=$6
+rho_far=$7
+MH=$8
+fitMH=$9
+r_nu=${10}
+r_anu=${11}
+mares=${12}
+X=${13}
+X_input=${14}
+min_X=${15}
+max_X=${16}
+div_X=${17}
+Y=${18}
+Y_input=${19}
+min_Y=${20}
+max_Y=${21}
+div_Y=${22}
+mail=${23}
 ######################  Parameters ###################################################
 que=s  # e:<10min s:<3h l:<24h h:<1w
 scan_mode=1 # 0:serial X-Y scan 1:parallel X-Y scan
@@ -73,10 +75,24 @@ elif [ $MH -eq -1 ];then
 fi
 #outfile=${X}-${Y}_${iD}_${MMH}_${fitMH}_${r_nu}_${r_anu}_${X_input}_${Y_input}.dat
 outfile=${X}-${Y}_${X_input}_${Y_input}.dat
+outfile2=pulls.dat
+outfile3=pulls_all.dat
 rm -rf $outfile
 touch $outfile
 outdir=rslt_unit_out
-makedir.sh $outdir 1
+./makedir.sh $outdir 1
+
+# working space for jobs on a remote server
+if [ $job_system == "icrr" ];then
+    work_dir=/disk/th/work/takaesu/$rundir
+    if [ -e $work_dir ];then
+	echo "$work_dir exists. Delete and remake it"
+	rm -rf $work_dir
+    fi
+    mkdir $work_dir
+elif [ $job_system == "kekcc" ];then
+    work_dir=./
+fi
 
 i=1
 XX=$min_X
@@ -86,7 +102,7 @@ while [ $icheck_X -eq 0 ];do
     icheck_Y=`echo "$YY > $max_Y" | bc`
     while [ $icheck_Y -eq 0 ];do
 	jobname="chi2_oab"$RANDOM
-	./submit_job.sh bsub $que $i $jobname "${maindir}/X-Y.sh $iDD $L $OAB_SK $OAB_far $rho_SK $rho_far $MH $fitMH $r_nu $r_anu $X $X_input $XX $Y $Y_input $YY 0" $scan_mode
+	./submit_job.sh $que $i $jobname "${maindir}/X-Y.sh $iDD $L $OAB_SK $OAB_far $rho_SK $rho_far $MH $fitMH $r_nu $r_anu $X $X_input $XX $Y $Y_input $YY 0" $scan_mode $work_dir
 	i=`expr $i + 1`
 	YY=`echo "scale=5; $YY + $step_Y" | bc | sed 's/^\./0./'`
 	icheck_Y=`echo "$YY > $max_Y" | bc` 
@@ -95,7 +111,13 @@ while [ $icheck_X -eq 0 ];do
     icheck_X=`echo "$XX > $max_X" | bc` 
 done
 
-monitor
+if [ $scan_mode -eq 1 ];then
+    ./monitor $work_dir
+fi
+if [ $job_system == "icrr" ];then
+    cp -rf $work_dir/* .
+    rm -rf $work_dir
+fi
 
 i=1
 XX=$min_X
@@ -105,6 +127,9 @@ while [ $icheck_X -eq 0 ];do
     icheck_Y=`echo "$YY > $max_Y" | bc`
     while [ $icheck_Y -eq 0 ];do
 	echo $XX $YY `cat par_$i/rslt_out/data/dchi2.dat` >> $outdir/$outfile
+	echo $XX `cat par_$i/rslt_out/data/pulls.dat` >> $outdir/$outfile2
+	echo $XX `cat par_$i/rslt_out/data/pulls_all.dat` >> $outdir/$outfile3
+#	cp -rf par_$i/rslt_out/results.log $outdir/results_$i.log
 	i=`expr $i + 1`
 	YY=`echo "scale=5; $YY + $step_Y" | bc | sed 's/^\./0./'`
 	icheck_Y=`echo "$YY > $max_Y" | bc` 
@@ -114,8 +139,9 @@ while [ $icheck_X -eq 0 ];do
     icheck_X=`echo "$XX > $max_X" | bc` 
 done
 cp -rf par_1/rslt_out/params.card $outdir/.
+cpr -rf X-Y_input_X-Y_scan.sh $outdir/.
 
 if [ $mail -eq 1 ]; then
-    bsub -q e -J X-Y_input_X-Y_scan -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
+    ./mail_notify $mail $job_system $jobname
 fi
 rm -rf par_*

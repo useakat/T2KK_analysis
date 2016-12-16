@@ -1,6 +1,7 @@
 #!/bin/bash
 maindir=`cat maindir.txt`
 bindir=`cat beam_neu_dir.txt`
+job_system=`cat job_system.txt`
 date1=`date`
 
 run=$1
@@ -38,11 +39,11 @@ max_CP=180
 div_CP=39
 ###############################################################################
 outdir=${CPmode}_${fitMH}_${eexp}_${L}_${OAB_SK}_${OAB_far}_${MH}_${r_nu}_${r_anu}_${th23}
-makedir.sh $outdir 1
+./makedir.sh $outdir 1
 
 mares=1100 # default value
 
-./X-Y_input_X-Y_scan.sh $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH $fitMH $r_nu $r_anu $mares CP_input NAN $min_CP $max_CP $div_CP CP_test NAN $min_CP_test $max_CP_test $div_CP_test 0
+./X-Y_input_X-Y_scan.sh $outdir $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH $fitMH $r_nu $r_anu $mares CP_input NAN $min_CP $max_CP $div_CP CP_test NAN $min_CP_test $max_CP_test $div_CP_test 0
 #./X-Y_input_X-Y_scan_CPrange.sh $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH $fitMH $r_nu $r_anu $mares CP_input NAN $min_CP $max_CP $div_CP CP_test NAN $min_CP_test $max_CP_test $div_CP_test 0
 
 mv rslt_unit_out/* $outdir/.
@@ -58,5 +59,5 @@ echo $date1
 echo $date2
 
 if [ $mail -eq 1 ]; then
-    bsub -q e -J CP_CP_run -u takaesu@post.kek.jp nulljob.sh >/dev/null 2>&1
+    ./mail_notify $mail $job_system CP_CP
 fi
