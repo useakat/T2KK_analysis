@@ -1,4 +1,43 @@
 #!/bin/bash
+################################################################################
+###    Module 
+################################################################################
+function chi2_CP_run_unit () {
+    nu=$1
+    anu=$2
+    ./CP_CP_run_2.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK \
+	$rho_far $MH $nu $anu $th23 0
+}
+################################################################################
+###    Module 
+################################################################################
+function chi2_CP_run_MH () {
+    MH=$1
+    chi2_CP_run_unit 9 1
+    chi2_CP_run_unit 7 3
+    chi2_CP_run_unit 1 1
+    chi2_CP_run_unit 3 7
+    chi2_CP_run_unit 1 9
+}
+#################################################################################
+###   Module of getting Delta chi^2_min vs delta_CP data for an experiment 
+###   (T2KK/T2KO/T2HK).
+#################################################################################
+function CP_analysis () {
+    run_name=${exp_name}_CP_${OAB_SK}_${OAB_far}_${L}km_$ext
+    ./makedir.sh rslt_$run_name 1
+    
+    cp -rf temp/$params_card temp/params.card 
+    th23=0.5
+    ./set_param.sh "thatm" $th23
+    ./set_param.sh "fthatm" $th23
+
+    chi2_CP_run_MH 1
+    chi2_CP_run_MH -1
+}
+#################################################################################
+### MAIN PROGRAM
+#################################################################################
 maindir=`cat maindir.txt`
 bindir=`cat beam_neu_dir.txt`
 date1=`date`
@@ -8,63 +47,9 @@ ext=$1
 params_card=$2
 run_mode=$3
 
-################################################################################
-###    Module of getting chi^2_min for various delta_CP values.
-################################################################################
-function chi2_CP_run_wrapper () {
-this_program=$0
-
-MH=1
-CP=0
-#./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
-cp -rf $this_program rslt_$run_name/.
-CP=90
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
-cp -rf $this_program rslt_$run_name/.
-CP=180
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
-cp -rf $this_program rslt_$run_name/.
-CP=270
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
-cp -rf $this_program rslt_$run_name/.
-
-MH=-1
-CP=0
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
-cp -rf $this_program rslt_$run_name/.
-CP=90
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
-cp -rf $this_program rslt_$run_name/.
-CP=180
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 0
-cp -rf $this_program rslt_$run_name/.
-CP=270
-./chi2_CP_run.sh $run_name $CPmode $fitMH $exp $L $OAB_SK $OAB_far $rho_SK $rho_far $MH 1 1 $CP 1
-cp -rf $this_program rslt_$run_name/.
-
-}
-
-#################################################################################
-###   Module of getting Delta chi^2_min vs delta_CP data for an experiment 
-###   (T2KK/T2KO/T2HK).
-#################################################################################
-function CP_analysis () {
-    
-    run_name=${exp_name}_CP_${OAB_SK}_${OAB_far}_${L}km_$ext
-    ./makedir.sh rslt_$run_name 1
-
-    cp -rf temp/$params_card temp/params.card 
-
-    chi2_CP_run_wrapper
-}
-
-#################################################################################
-### MAIN PROGRAM
-#################################################################################
 CPmode=CP
 fitMH=true
 rho_SK=2.6
-
 
 ### T2KK 
 exp=2
