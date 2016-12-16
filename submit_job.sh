@@ -15,7 +15,6 @@ jobname=$3
 command="$4"
 submit_mode=$5
 work_dir=$6
-
 njob=bjob
 
 dir=par_$i
