@@ -139,7 +139,7 @@ while [ $icheck_X -eq 0 ];do
     icheck_X=`echo "$XX > $max_X" | bc` 
 done
 cp -rf par_1/rslt_out/params.card $outdir/.
-cpr -rf X-Y_input_X-Y_scan.sh $outdir/.
+cp -rf X-Y_input_X-Y_scan.sh $outdir/.
 
 if [ $mail -eq 1 ]; then
     ./mail_notify $mail $job_system $jobname
