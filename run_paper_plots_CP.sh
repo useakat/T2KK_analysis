@@ -40,12 +40,16 @@ function CP_analysis () {
 #################################################################################
 maindir=`cat maindir.txt`
 bindir=`cat beam_neu_dir.txt`
+job_system=`cat job_system.txt`
 date1=`date`
 echo $date1
 
 ext=$1
 params_card=$2
 run_mode=$3
+mail=$4
+
+echo $ext $params_card $run_mode $mail
 
 CPmode=CP
 fitMH=true
@@ -86,3 +90,7 @@ rho_far=2.6
 OAB_SK=2.5
 OAB_far=2.5
 CP_analysis
+
+if [ $mail -eq 1 ]; then
+    ./mail_notify $mail $job_system CP_CP
+fi
