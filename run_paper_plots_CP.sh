@@ -14,10 +14,10 @@ function chi2_CP_run_unit () {
 function chi2_CP_run_MH () {
     MH=$1
     chi2_CP_run_unit 9 1
-    chi2_CP_run_unit 7 3
-    chi2_CP_run_unit 1 1
-    chi2_CP_run_unit 3 7
-    chi2_CP_run_unit 1 9
+#    chi2_CP_run_unit 7 3
+#    chi2_CP_run_unit 1 1
+#    chi2_CP_run_unit 3 7
+#    chi2_CP_run_unit 1 9
 }
 #################################################################################
 ###   Module of getting Delta chi^2_min vs delta_CP data for an experiment 
@@ -33,7 +33,9 @@ function CP_analysis () {
     ./set_param.sh "fthatm" $th23
 
     chi2_CP_run_MH 1
-    chi2_CP_run_MH -1
+#    chi2_CP_run_MH -1
+
+    ./mail_notify 1 $job_system CP_CP
 }
 #################################################################################
 ### MAIN PROGRAM
@@ -64,12 +66,12 @@ rho_far=2.9
 ## OAB_far = 0.5
 OAB_SK=3.0
 OAB_far=0.5
-CP_analysis
+#CP_analysis
 
 ## OAB_far = 1.0
 OAB_SK=2.5
 OAB_far=1.0
-CP_analysis
+#CP_analysis
 
 
 ### T2K0
@@ -79,7 +81,7 @@ L=653
 rho_far=2.75
 OAB_SK=2.5
 OAB_far=0.9
-CP_analysis
+#CP_analysis
 
 
 ### T2HK
