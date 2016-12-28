@@ -29,7 +29,7 @@ mail=${14}
 
 min_CP=-180
 max_CP=180
-div_CP=20
+div_CP=30
 #div_CP=2
 ##########################################################################
 outdir=${CPmode}_${fitMH}_${eexp}_${L}_${OAB_SK}_${OAB_far}_${MH}_${r_nu}_${r_anu}_${CP_input}
