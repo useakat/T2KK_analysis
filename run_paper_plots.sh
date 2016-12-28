@@ -3,9 +3,7 @@
 date1=`date`
 echo $date1
 
-#ext=referee-chi2_test
-#ext=sumdat_30points
-ext=sumth_30points
+ext=referee-chi2_40points_3
 params_card=params.card_new_50MeV
 #params_card=params.card_new_50MeV_nosmear
 #params_card=params.card_new_50MeV_nosmear_nofit
